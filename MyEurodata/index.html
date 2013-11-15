@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo UI DataViz</title>
+    <meta charset="UTF-8" />
+
+    <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet" />
+
+    <!--Once the final theme is chosen the redundant css reference should removed-->
+    <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
+    <link href="kendo/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
+
+    <link href="styles/main.css" rel="stylesheet" />
+
+    <script src="cordova.js"></script>
+    <script src="kendo/js/jquery.min.js"></script>
+    <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/pie-chart.js"></script>
+    <script src="scripts/gauge.js"></script>
+    <script src="scripts/qr-code.js"></script>
+    <script src="scripts/stock-chart.js"></script>
+</head>
+
+<body>
+    <!--Pie chart-->
+    <div id="tabstrip-pie-chart"
+        data-role="view"
+        data-title="Pie Chart"
+        data-show="app.pieChart.createPieChart"
+        data-hide="app.pieChart.unbindResizeEvent"
+        data-stretch="true">
+
+        <div id="pie-chart"></div>
+
+    </div>
+
+    <!--Gauge-->
+    <div id="tabstrip-gauge"
+        data-role="view"
+        data-title="Gauge"
+        data-show="app.gauge.createGauge"
+        data-hide="app.gauge.unbindResizeEvent"
+        data-stretch="true">
+
+        <div id="gauge-wrap" data-role="content">
+            <div id="gauge"></div>
+            <div class="widget-content">
+                <input id="gauge-value" type="range">
+            </div>
+        </div>
+
+    </div>
+
+    <!--QR code-->
+    <div id="tabstrip-qrcode"
+        data-role="view"
+        data-title="QR Code"
+        data-show="app.qrcode.createQRCode">
+
+        <div data-role="content">
+            <div id="qrcode"></div>
+            <div class="widget-content">
+                <form onsubmit="return false;">
+                    <input type="text" id="qrcode-value" value="http://www.icenium.com/">
+                    <input type="submit" data-role="button" id="qrcode-generate" value="Update QR" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Stock chart-->
+    <div id="tabstrip-stock-chart"
+        data-role="view"
+        data-title="Stock Chart"
+        data-show="app.stockChart.createStockChart"
+        data-hide="app.stockChart.unbindResizeEvent"
+        data-stretch="true">
+
+        <div id="stock-chart"></div>
+
+    </div>
+
+    <!--Layout-->
+    <div data-role="layout"
+        data-id="mobile-tabstrip">
+
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <a data-align="right" data-role="button" data-click="app.changeSkin">Flat</a>
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-pie-chart" data-icon="globe">Pie Chart</a>
+                <a href="#tabstrip-gauge" data-icon="recents">Gauge</a>
+                <a href="#tabstrip-qrcode" data-icon="camera">QR Code</a>
+                <a href="#tabstrip-stock-chart" data-icon="featured">Stock Chart</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
