@@ -17,6 +17,7 @@
     <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
 
     <script src="scripts/app.js"></script>
+    <script src="scripts/home.js"></script>
     <script src="scripts/pie-chart.js"></script>
     <script src="scripts/gauge.js"></script>
     <script src="scripts/qr-code.js"></script>
@@ -24,6 +25,17 @@
 </head>
 
 <body>
+    
+    <!-- General -->
+    
+    <div id="tabstrip-general" data-role="view" data-title="MY Eurodata" data-model="app.homeViewModel">
+        
+    </div>
+    
+    
+    <!-- End general -->
+    
+    
     <!--Pie chart-->
     <div id="tabstrip-pie-chart"
         data-role="view"
@@ -84,8 +96,7 @@
     </div>
 
     <!--Layout-->
-    <div data-role="layout"
-        data-id="mobile-tabstrip">
+    <div data-role="layout" data-id="mobile-tabstrip">
 
         <!--Header-->
         <div data-role="header">
@@ -98,10 +109,7 @@
         <!--Footer-->
         <div data-role="footer">
             <div data-role="tabstrip">
-                <a href="#tabstrip-pie-chart" data-icon="globe">Pie Chart</a>
-                <a href="#tabstrip-gauge" data-icon="recents">Gauge</a>
-                <a href="#tabstrip-qrcode" data-icon="camera">QR Code</a>
-                <a href="#tabstrip-stock-chart" data-icon="featured">Stock Chart</a>
+                <a href="#tabstrip-general" data-icon="home">Geral</a>
             </div>
         </div>
 

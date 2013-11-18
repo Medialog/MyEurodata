@@ -45,3 +45,9 @@ body, html {
     margin: 1em auto;
     top: 50%;
 }
+
+.main-header{
+    height:70px;
+    background:url('../styles/images/MyEurodataTV2010-Setup 500x70.png');
+    background-position:bottom;
+}
