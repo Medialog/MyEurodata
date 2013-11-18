@@ -9,19 +9,16 @@
     <!--Once the final theme is chosen the redundant css reference should removed-->
     <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
-
+    <link href="kendo/styles/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="styles/main.css" rel="stylesheet" />
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+    <script src="kendo/js/bootstrap.min.js"></script>
 
     <script src="scripts/app.js"></script>
     <script src="scripts/home.js"></script>
-    <script src="scripts/pie-chart.js"></script>
-    <script src="scripts/gauge.js"></script>
-    <script src="scripts/qr-code.js"></script>
-    <script src="scripts/stock-chart.js"></script>
 </head>
 
 <body>
@@ -29,6 +26,41 @@
     <!-- General -->
     
     <div id="tabstrip-general" data-role="view" data-title="MY Eurodata" data-model="app.homeViewModel">
+        
+        <div id="home">
+            <div class="row" style="padding-left:10px;padding-right:10px;padding-top:10px">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Pie Chart de Canais
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Informação do país
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-left:10px;padding-right:10px">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Top 15 de canais
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Gráfico de Barras de Genres
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     </div>
     
@@ -96,6 +128,7 @@
     </div>
 
     <!--Layout-->
+    
     <div data-role="layout" data-id="mobile-tabstrip">
 
         <!--Header-->
@@ -114,5 +147,7 @@
         </div>
 
     </div>
+    
+    <!-- End layout -->
 </body>
 </html>
