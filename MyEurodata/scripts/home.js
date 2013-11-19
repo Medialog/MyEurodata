@@ -44,8 +44,9 @@
                     }
                 },
                 title: {
+                    visible: false,
                     position: "top",
-                    text: "Share By Channel"
+                    text: ""
                 },
                 legend: {
                     position: "bottom"
@@ -60,7 +61,7 @@
                 },
                 series: [
                     {
-                        field: "Share",
+                        field: "ShrPercentage",
                         categoryField: "Channel",
                         padding: 0
                     }
