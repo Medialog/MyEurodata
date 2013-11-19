@@ -21,6 +21,23 @@
         initializeViewDesign: function() {
             app.homeViewModel.createRankingByChannelChart();
             app.homeViewModel.bindResizeEvent();
+            
+            app.homeViewModel.bindTopProgramsList();
+        },
+        
+        bindTopProgramsList: function() {
+            $("#topProgramsList").kendoMobileListView({
+                dataSource: {
+                    pageSize: 3,
+                    transport: {
+                        read: {
+                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences",
+                            dataType: "json"
+                        }
+                    }
+                },
+                template: $("#topProgramsListTemplate").html()
+            });  
         },
         
         createRankingByChannelChart: function() {
@@ -54,6 +71,7 @@
                 chartArea: {
                     background: "",
                     width: $("#ratingsByChannel-chart").width(),
+                    height: 300,
                     margin: app.emToPx(1)
                 },
                 seriesDefaults: {

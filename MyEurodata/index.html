@@ -29,8 +29,8 @@
         data-hide="app.homeViewModel.unbindResizeEvent" data-show="app.homeViewModel.initializeViewDesign">
         
         <div id="home">
-            <div class="row" style="padding-left:10px;padding-right:10px;padding-top:10px">
-                <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="row" style="padding-left:10px;padding-right:10px;padding-top:10px;">
+                <div class="col-xs-12 col-sm-6 col-md-6" >
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <label>Share by Channel</label>
@@ -51,11 +51,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="padding-left:10px;padding-right:10px">
+            <div class="row" style="padding-left:10px;padding-right:10px;">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel panel-default">
+                        <div class="pane-heading">
+                            <label>Top Programs</label>
+                        </div>
                         <div class="panel-body">
-                            Top 15 de canais
+                            <ul id="topProgramsList">
+                            </ul>    
                         </div>
                     </div>                    
                 </div>
@@ -78,17 +82,24 @@
     
     <div data-role="drawer" id="country-drawer" style="width:200px;margin-top:40px" data-views="['/']">
         <ul data-role="listview" data-type="group">
-            <li>Countries
-                <ul>
-                    <li><a href="/" data-click="app.homeViewModel.onCountryClick" data-id="France" data-transition="none">France</a></li>
-                    <li><a href="/" data-click="app.homeViewModel.onCountryClick" data-id="Usa" data-transition="none">USA</a></li>
-                    <li><a href="/" data-click="app.homeViewModel.onCountryClick" data-id="Japan" data-transition="none">Japan</a></li>
-                </ul>
-            </li>
+            <label>Countries</label>
+            <li><div data-role="button" data-click="app.homeViewModel.onCountryClick" data-id="France" data-transition="none">France</div></li>
+            <li><div data-role="button" data-click="app.homeViewModel.onCountryClick" data-id="Usa" data-transition="none">USA</div></li>
+            <li><div data-role="button" data-click="app.homeViewModel.onCountryClick" data-id="Japan" data-transition="none">Japan</div></li>
         </ul>
     </div>
     
     <!-- End Drawers -->
+    
+    <!-- Templates -->
+    
+    <script type="text/x-kendo-template" id="topProgramsListTemplate">
+        <h3 class="item-program">${Program}</h3>
+        <p class="item-channel">${Channel}</p>
+        <p class="item-share">${ShrPercentage}</p>
+    </script>
+    
+    <!-- End Templates -->
     
     
     <!--Pie chart-->
