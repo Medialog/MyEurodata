@@ -51,3 +51,5 @@ body, html {
     background:url('../styles/images/MyEurodataTV2010-Setup 500x70.png');
     background-position:bottom;
 }
+
+.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }

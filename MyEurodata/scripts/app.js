@@ -3,6 +3,10 @@
         mobileSkin = "",
         defaultChartTheme = 'silver',
         app = global.app = global.app || {};
+    
+    app.myEurodataAPIUrl = "http://localhost/MyEurodata2015WebApi/api/";
+    
+    app.selectedCountry = "France";
 
     app.chartsTheme = defaultChartTheme;
 

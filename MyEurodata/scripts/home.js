@@ -38,7 +38,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "http://localhost/MyEurodata2015WebApi/api/values/GetCountryAudiences?country=FRANCE&json=true",
+                            url: app.myEurodataAPIUrl + "values/GetCountryAudiences?country=" + app.selectedCountry,
                             dataType: "json"
                         }
                     }
@@ -82,7 +82,12 @@
         unbindResizeEvent: function () {
             //unbind the "resize event" to prevent redudntant calculations when the tab is not active
             $(window).off("resize.rankingByChannelChart");
-        }
+        },
         
+        onCountryClick: function(e){
+            var dataId = e.button.data().id;
+            app.selectedCountry = dataId;
+            app.homeViewModel.initializeViewDesign();
+        }
     };
 })(window, jQuery);

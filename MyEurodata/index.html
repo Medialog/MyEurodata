@@ -74,6 +74,22 @@
     
     <!-- End general -->
     
+    <!-- Drawers -->
+    
+    <div data-role="drawer" id="country-drawer" style="width:200px;margin-top:40px" data-views="['/']">
+        <ul data-role="listview" data-type="group">
+            <li>Countries
+                <ul>
+                    <li><a href="/" data-click="app.homeViewModel.onCountryClick" data-id="France" data-transition="none">France</a></li>
+                    <li><a href="/" data-click="app.homeViewModel.onCountryClick" data-id="Usa" data-transition="none">USA</a></li>
+                    <li><a href="/" data-click="app.homeViewModel.onCountryClick" data-id="Japan" data-transition="none">Japan</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- End Drawers -->
+    
     
     <!--Pie chart-->
     <div id="tabstrip-pie-chart"
@@ -141,6 +157,7 @@
         <!--Header-->
         <div data-role="header">
             <div data-role="navbar">
+                <a data-role="button" data-rel="drawer" href="#country-drawer" data-icon="drawer-button" data-align="left"></a>
                 <a data-align="right" data-role="button" data-click="app.changeSkin">Flat</a>
                 <span data-role="view-title"></span>
             </div>
