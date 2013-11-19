@@ -1,6 +1,20 @@
 (function (global, $) {
     var rankingByChannelChart = null;
     app = global.app = global.app || {};
+    
+    function getData(pageSize, url, dataSourceToSet, viewModel){
+        var that = this;
+        var dataSource = new kendo.data.DataSource({
+            pageSize: pageSize,
+            transport: {
+                read: {
+                    url: url,
+                    dataType: "json"
+                }
+            }
+        });
+        viewModel.set(dataSourceToSet, dataSource);
+    };
 
     app.homeViewModel = {
         
@@ -21,9 +35,17 @@
             rankingByChannelChart = $rankingByChannelChart.kendoChart({
                 theme: global.app.chartsTheme,
                 renderAs: "svg",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "http://localhost/MyEurodata2015WebApi/api/values/GetCountryAudiences?country=FRANCE&json=true",
+                            dataType: "json"
+                        }
+                    }
+                },
                 title: {
                     position: "top",
-                    text: "Internet Population Growth, 2007 - 2012"
+                    text: "Share By Channel"
                 },
                 legend: {
                     position: "bottom"
@@ -33,31 +55,14 @@
                     width: $("#ratingsByChannel-chart").width(),
                     margin: app.emToPx(1)
                 },
+                seriesDefaults: {
+                    type: "pie"
+                },
                 series: [
                     {
-                        type: "pie",
-                        startAngle: 150,
-                        data: [
-                            {
-                                category: "Asia",
-                                value: 53.8
-                            }, {
-                                category: "Europe",
-                                value: 16.1
-                            }, {
-                                category: "Latin America",
-                                value: 11.3
-                            }, {
-                                category: "Africa",
-                                value: 9.6
-                            }, {
-                                category: "Middle East",
-                                value: 5.2
-                            }, {
-                                category: "North America",
-                                value: 3.6
-                            }
-                        ]
+                        field: "Share",
+                        categoryField: "Channel",
+                        padding: 0
                     }
                 ],
                 tooltip: {
