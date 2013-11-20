@@ -32,6 +32,14 @@
             app.homeViewModel.bindResizeEvent();
             
             $(".km-scroll-header").css("display", "none");
+            
+        },
+        
+        updateMenu: function(){
+            /*$("#CurrentViewAnchor").prop("href", "#tabstrip-general");
+            $("#CurrentViewAnchor").text("By Country");
+            $("#SecondaryViewAnchor").text("By Program");
+            $("#SecondaryViewAnchor").prop("href", "#tabstrip-programs");*/
         },
         
         bindTopProgramsList: function() {
