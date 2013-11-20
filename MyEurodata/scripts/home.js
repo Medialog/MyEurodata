@@ -28,14 +28,14 @@
         bindTopProgramsList: function() {
             $("#topProgramsList").kendoMobileListView({
                 dataSource: {
-                    pageSize: 5,
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences",
+                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences?country=" + app.selectedCountry,
                             dataType: "json"
                         }
                     },
-                    group: "Region"
+                    group: {field: "Region"},
+                    sort: { field: "RatPercentage", dir: "desc" }
                 },
                 type: "group",
                 fixedHeaders: true,
