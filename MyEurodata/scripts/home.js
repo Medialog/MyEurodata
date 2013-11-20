@@ -28,14 +28,18 @@
         bindTopProgramsList: function() {
             $("#topProgramsList").kendoMobileListView({
                 dataSource: {
-                    pageSize: 3,
+                    pageSize: 5,
                     transport: {
                         read: {
                             url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences",
                             dataType: "json"
                         }
-                    }
+                    },
+                    group: "Region"
                 },
+                type: "group",
+                fixedHeaders: true,
+                headerTemplate: $("#topProgramsListHeaderTemplate").html(),
                 template: $("#topProgramsListTemplate").html()
             });  
         },
@@ -55,7 +59,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetCountryAudiences?country=" + app.selectedCountry,
+                            url: app.myEurodataAPIUrl + "values/GetCountryChannelsAudiences?country=" + app.selectedCountry,
                             dataType: "json"
                         }
                     }

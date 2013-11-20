@@ -54,23 +54,30 @@ body, html {
 
 .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
 
+#topProgramsList li{
+    padding-right: 0px !important;
+}
+
 #topProgramsList .item-program {
     float: left;
-    font-size: .8em;
+    font-size: .7em;
     line-height: 1.0em;
-    margin: .3em 1em 0 .6em;
+    margin: 0 0 0 0;
     width: 50%;
 }
+
 #topProgramsList .item-channel {
     float: left;
     font-size: .7em;
     line-height: 1em;
-    margin: 0 0 0 .95em;
-    width: 45%;
+    margin: 0 0 0 0;
+    width: 20%;
 }
 
 #topProgramsList .item-program,
-#topProgramsList .item-channel {
+#topProgramsList .item-channel,
+#topProgramsList .item-share
+ {
     color: #4c2a1b;
 }
 
@@ -79,8 +86,14 @@ body, html {
 }
 
 #topProgramsList .item-share {
-    margin-top: -1em;
-    position: absolute;
-    right: 0.6em;
-    top: 50%;
+    float: left;
+    font-size: .7em;
+    line-height: 1.0em;
+    margin: 0 0 0 0;
+    width: 15%;
+}
+
+.panel-heading{
+    padding-top: 5px !important;
+    padding-bottom: 0px !important;
 }

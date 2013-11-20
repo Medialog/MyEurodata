@@ -54,7 +54,7 @@
             <div class="row" style="padding-left:10px;padding-right:10px;">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel panel-default">
-                        <div class="pane-heading">
+                        <div class="panel-heading">
                             <label>Top Programs</label>
                         </div>
                         <div class="panel-body">
@@ -94,9 +94,18 @@
     <!-- Templates -->
     
     <script type="text/x-kendo-template" id="topProgramsListTemplate">
-        <h3 class="item-program">${Program}</h3>
-        <p class="item-channel">${Channel}</p>
-        <p class="item-share">${ShrPercentage}</p>
+        <h4 class="item-channel">${Channel}</h4>
+        <h4 class="item-program">${Program}</h4>
+        <h4 class="item-share">${ShrPercentage}%</h4>
+        <h4 class="item-share">${RatPercentage}%</h4>
+    </script>
+    
+    <script type="text/x-kendo-template" id="topProgramsListHeaderTemplate">
+        <h4 class="item-channel">Channel</h4>
+        <h4 class="item-program">Program</h4>
+        <h4 class="item-share" style="padding-right:.7em">Shr%</h4>
+        <h4 class="item-share" style="padding-right:.7em">Rat%</h4>
+        <div style="clear:both"></div>
     </script>
     
     <!-- End Templates -->
