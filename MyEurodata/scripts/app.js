@@ -20,7 +20,7 @@
 
     //Skin change function is for the demo. On real project only one theme should be chosen.
     app.changeSkin = function (e) {
-        if (e.sender.element.text() === "Flat") {
+        /*if (e.sender.element.text() === "Flat") {
             e.sender.element.text("Native");
             global.app.chartsTheme = 'flat';
             mobileSkin = "flat";
@@ -32,7 +32,7 @@
         }
 
         application.skin(mobileSkin);
-        application.view().show();
+        application.view().show();*/
     };
 
     app.emToPx = function (input) {

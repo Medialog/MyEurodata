@@ -8,7 +8,7 @@
 
     <!--Once the final theme is chosen the redundant css reference should removed-->
     <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
-    <link href="kendo/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
+    <!--<link href="kendo/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />-->
     <link href="kendo/styles/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="styles/main.css" rel="stylesheet" />
 
@@ -79,14 +79,17 @@
         </div>
         
     </div>
-    
-    
+
     <!-- End general -->
+    
+    <!-- Programs -->
     
     <div id="tabstrip-programs" data-role="view" data-title="By Program" data-layout="programs-tabstrip" data-model="app.programsViewModel" data-show="app.programsViewModel.initializeViewDesign"
         data-before-show="app.programsViewModel.updateMenu">
     <span>aaaaaaa</span>  
     </div>
+    
+    <!-- End Programs -->
     
     <!-- Drawers -->
     
@@ -119,66 +122,6 @@
     </script>
     
     <!-- End Templates -->
-    
-    
-    <!--Pie chart-->
-    <div id="tabstrip-pie-chart"
-        data-role="view"
-        data-title="Pie Chart"
-        data-show="app.pieChart.createPieChart"
-        data-hide="app.pieChart.unbindResizeEvent"
-        data-stretch="true">
-
-        <div id="pie-chart"></div>
-
-    </div>
-
-    <!--Gauge-->
-    <div id="tabstrip-gauge"
-        data-role="view"
-        data-title="Gauge"
-        data-show="app.gauge.createGauge"
-        data-hide="app.gauge.unbindResizeEvent"
-        data-stretch="true">
-
-        <div id="gauge-wrap" data-role="content">
-            <div id="gauge"></div>
-            <div class="widget-content">
-                <input id="gauge-value" type="range">
-            </div>
-        </div>
-
-    </div>
-
-    <!--QR code-->
-    <div id="tabstrip-qrcode"
-        data-role="view"
-        data-title="QR Code"
-        data-show="app.qrcode.createQRCode">
-
-        <div data-role="content">
-            <div id="qrcode"></div>
-            <div class="widget-content">
-                <form onsubmit="return false;">
-                    <input type="text" id="qrcode-value" value="http://www.icenium.com/">
-                    <input type="submit" data-role="button" id="qrcode-generate" value="Update QR" />
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-    <!--Stock chart-->
-    <div id="tabstrip-stock-chart"
-        data-role="view"
-        data-title="Stock Chart"
-        data-show="app.stockChart.createStockChart"
-        data-hide="app.stockChart.unbindResizeEvent"
-        data-stretch="true">
-
-        <div id="stock-chart"></div>
-
-    </div>
 
     <!--Layouts -->
     
@@ -248,24 +191,6 @@
     
     <script>
         /*$(document).ready(function(){
-            $("#SecondaryViewAnchor").on("click", function(){
-                //alert($(this).text());
-                if($(this).attr("href") == "#tabstrip-general")
-                {
-                    $(this).prop("href", "#tabstrip-programs");
-                    $("#CurrentViewAnchor").attr("href", "#tabstrip-general");
-                }
-                    
-                else
-                {
-                    $(this).prop("href", "#tabstrip-general");
-                    $("#CurrentViewAnchor").attr("href", "#tabstrip-programs");
-                }
-                var text = $("#CurrentViewAnchor").text();
-                $("#CurrentViewAnchor").text($(this).text());
-                $(this).text(text);
-                return true;
-            });
         });*/
     </script>
     
