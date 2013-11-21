@@ -98,11 +98,28 @@ body, html {
     padding-bottom: 0px !important;
 }
 
-/*.country-button {
-    padding: 0px 10px 0px 10px !important;
-    font-size:12px;
-    margin:0px
-}*/
+.km-button a {
+    text-decoration: none;
+}
+
+.km-ios #popover .km-view-title,
+    .km-ios #targets-popover .km-view-title
+    {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+
+    .km-ios #popover .km-navbar,
+    .km-root > * > #popover > .km-content
+    {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))) #000;
+    }
+
+    .km-ios #popover .km-navbar .km-button
+    {
+        background-color: #000;
+    }
+
 
 
 /* Country Menu */

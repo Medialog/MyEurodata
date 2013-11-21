@@ -100,6 +100,17 @@
             </div>
         </div>
         
+        <!-- Popovers -->
+        
+        <div data-role="popover" id="target-popover" data-popup='{"height": "10em", "width": "20em"}'>
+            <div data-role="view" data-title="Targets" data-model="app.homeViewModel" data-show="app.homeViewModel.bindTargets">
+                <ul data-role="listview" id="targetsListView">
+                </ul>
+            </div>
+        </div>
+        
+        <!-- End Popovers -->
+        
     </div>
 
     <!-- End general -->
@@ -143,8 +154,12 @@
         <div style="clear:both"></div>
     </script>
     
+    <script id="targetsListViewTmpl" type="text/x-kendo-tmpl">
+        <label style="color:\\#4D4D4D;font-size:11px">#: Name # <input name="targetSelected" type="radio" checked></label>
+    </script>
+    
     <!-- End Templates -->
-
+    
     <!--Layouts -->
     
     <div data-role="layout" data-id="mobile-tabstrip">
@@ -174,18 +189,16 @@
                     </table>
                 </div>
             </div>
-            <!--<div data-role="navbar">
-                <a data-role="button" data-rel="drawer" href="#country-drawer" data-icon="drawer-button" data-align="left"></a>
-                <a data-align="right" data-role="button" data-click="app.changeSkin">Flat</a>
-                <span data-role="view-title"></span>
-            </div>-->
         </div>
 
         <!--Footer-->
         <div data-role="footer">
-            <div data-role="tabstrip">
-                <a href="#tabstrip-general" data-icon="home">Geral</a>
+            <div data-role="navbar">
+                <a data-align="right" style="margin-right:10px;" href="#target-popover" data-rel="popover" data-role="button">Targets</a>
             </div>
+            <!--<div data-role="tabstrip">
+                <a href="#tabstrip-general" data-icon="home">Geral</a>
+            </div>-->
         </div>
 
     </div>
@@ -205,11 +218,6 @@
                     </table>
                 </div>
             </div>
-            <!--<div data-role="navbar">
-                <a data-role="button" data-rel="drawer" href="#country-drawer" data-icon="drawer-button" data-align="left"></a>
-                <a data-align="right" data-role="button" data-click="app.changeSkin">Flat</a>
-                <span data-role="view-title"></span>
-            </div>-->
         </div>
 
         <!--Footer-->
@@ -223,7 +231,7 @@
     
     <!-- End layouts -->
     
-    <script>
+    <script>        
         /*$(document).ready(function(){
         });*/
     </script>

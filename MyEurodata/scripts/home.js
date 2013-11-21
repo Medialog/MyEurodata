@@ -2,22 +2,9 @@
     var rankingByChannelChart = null;
     var rankingByGenreChart = null;
     var channelAudienceInTimeChart = null;
+    var targetsLoaded = false;
     app = global.app = global.app || {};
-    
-    function getData(pageSize, url, dataSourceToSet, viewModel){
-        var that = this;
-        var dataSource = new kendo.data.DataSource({
-            pageSize: pageSize,
-            transport: {
-                read: {
-                    url: url,
-                    dataType: "json"
-                }
-            }
-        });
-        viewModel.set(dataSourceToSet, dataSource);
-    };
-    
+       
     function GetDataForSeries(items, displayFeld, valueField) {
         var dataArray = [];
         for (var i = 0; i < items.length; i++) {
@@ -46,12 +33,43 @@
         updateMenu: function(){
         },
         
+        bindTargets: function() {
+            if(app.homeViewModel.targetsLoaded) return;
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "data/targets.json",
+                        dataType: "json"
+                    }
+                } 
+            });
+            dataSource.read();
+            $("#targetsListView").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#targetsListViewTmpl").html()
+                }).kendoTouch({
+                    filter: ">li",
+                    enableSwipe: false,
+                    tap: function(e){
+                        app.homeViewModel.closeFilterPopover(e);
+                        //var vendorName = $(e.touch.currentTarget).find("label").text();
+                        //kendo.mobile.application.navigate("#tabstrip-vendor?uid=" + vendorName);
+                    }
+                });
+            app.homeViewModel.targetsLoaded = true;
+        },
+        
+        closeFilterPopover: function(e) {
+            var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+            popover.close();
+        },
+        
         bindTopProgramsList: function() {
             $("#topProgramsList").kendoMobileListView({
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences?country=" + app.selectedCountry,
+                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
                             dataType: "json"
                         }
                     },
@@ -77,7 +95,7 @@
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: app.myEurodataAPIUrl + "values/GetCountryChannelsWeeksAudiences?country=" + app.selectedCountry,
+                        url: app.myEurodataAPIUrl + "values/GetCountryChannelsWeeksAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
                         dataType: "json"
                     }
                 },
@@ -106,23 +124,17 @@
                             position: "bottom"
                         },
                         valueAxis: {
-                            line: {
-                                visible: false
-                            },
-                            minorGridLines: {
-                                visible: false
-                            }
+                            line: { visible: false },
+                            minorGridLines: { visible: false }
                         },
                         categoryAxis: {
                             field: "Week",
-                            majorGridLines: {
-                            visible: false
-                            }
+                            majorGridLines: { visible: false }
                         },
                         chartArea: {
                             background: "",
                             width: $("#channelAudienceInTime-chart").width(),
-                            height: 300,
+                            //height: 300,
                             margin: app.emToPx(1)
                         },
                         seriesDefaults: {
@@ -137,82 +149,6 @@
                 }
             });
             dataSource.read();
-            
-            
-            /*channelAudienceInTimeChart = $channelAudienceInTimeChart.kendoChart({
-                theme: global.app.chartsTheme,
-                renderAs: "svg",
-                dataSource: {
-                    transport: {
-                        read: {
-                            url: app.myEurodataAPIUrl + "values/GetCountryChannelsWeeksAudiences?country=" + app.selectedCountry,
-                            dataType: "json"
-                        }
-                    }
-                },
-                title: {
-                    visible: false,
-                    position: "top",
-                    text: ""
-                },
-                legend: {
-                    visible: true,
-                    position: "bottom"
-                },
-                valueAxis: {
-                    line: {
-                        visible: false
-                    },
-                    minorGridLines: {
-                        visible: false
-                    }
-                },
-                categoryAxis: {
-                    field: "Week",
-                    majorGridLines: {
-                        visible: false
-                    }
-                },
-                chartArea: {
-                    background: "",
-                    width: $("#channelAudienceInTime-chart").width(),
-                    height: 300,
-                    margin: app.emToPx(1)
-                },
-                seriesDefaults: {
-                    type: "line"
-                },
-                series: [
-                    {
-                        field: "ShrPercentage1",
-                        name: "#: group.field #"
-                    },
-                    {
-                        field: "ShrPercentage2",
-                        name: "#= Channel2 #"
-                    },
-                    {
-                        field: "ShrPercentage3",
-                        name: "#= Channel3 #"
-                    },
-                    {
-                        field: "ShrPercentage4",
-                        name: "#= Channel4 #"
-                    },
-                    {
-                        field: "ShrPercentage5",
-                        name: "#= Channel5 #"
-                    },
-                    {
-                        field: "ShrPercentage6",
-                        name: "#= Channel6 #"
-                    }
-                ],
-                tooltip: {
-                    visible: true,
-                    format: "{0}%"
-                }
-            }).data("kendoChart");*/
             
         },
         
@@ -231,7 +167,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetCountryGenresAudiences?country=" + app.selectedCountry,
+                            url: app.myEurodataAPIUrl + "values/GetCountryGenresAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
                             dataType: "json"
                         }
                     }
@@ -260,7 +196,7 @@
                 chartArea: {
                     background: "",
                     width: $("#ratingsByGenre-chart").width(),
-                    height: 300,
+                    //height: 300,
                     margin: app.emToPx(1)
                 },
                 seriesDefaults: {
@@ -296,7 +232,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetCountryChannelsAudiences?country=" + app.selectedCountry,
+                            url: app.myEurodataAPIUrl + "values/GetCountryChannelsAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
                             dataType: "json"
                         }
                     }
@@ -312,7 +248,7 @@
                 chartArea: {
                     background: "",
                     width: $("#ratingsByChannel-chart").width(),
-                    height: 300,
+                    //height: 300,
                     margin: app.emToPx(1)
                 },
                 seriesDefaults: {
