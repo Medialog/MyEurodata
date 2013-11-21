@@ -8,10 +8,6 @@
         },
         
         updateMenu: function(){
-            /*$("#CurrentViewAnchor").prop("href", "#tabstrip-programs");
-            $("#CurrentViewAnchor").text("By Program");
-            $("#SecondaryViewAnchor").text("By Country");
-            $("#SecondaryViewAnchor").prop("href", "#tabstrip-general");*/
         }
     };
 

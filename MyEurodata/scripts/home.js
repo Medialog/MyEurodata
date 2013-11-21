@@ -17,7 +17,15 @@
         });
         viewModel.set(dataSourceToSet, dataSource);
     };
-
+    
+    function GetDataForSeries(items, displayFeld, valueField) {
+        var dataArray = [];
+        for (var i = 0; i < items.length; i++) {
+            dataArray.push([items[i][displayFeld], items[i][valueField]]);
+        }
+        return dataArray;
+    };
+    
     app.homeViewModel = {
         
         initializeViewDesign: function() {
@@ -36,10 +44,6 @@
         },
         
         updateMenu: function(){
-            /*$("#CurrentViewAnchor").prop("href", "#tabstrip-general");
-            $("#CurrentViewAnchor").text("By Country");
-            $("#SecondaryViewAnchor").text("By Program");
-            $("#SecondaryViewAnchor").prop("href", "#tabstrip-programs");*/
         },
         
         bindTopProgramsList: function() {
@@ -70,7 +74,72 @@
             
             $channelAudienceInTimeChart = $("#channelAudienceInTime-chart").empty();
             
-            channelAudienceInTimeChart = $channelAudienceInTimeChart.kendoChart({
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: app.myEurodataAPIUrl + "values/GetCountryChannelsWeeksAudiences?country=" + app.selectedCountry,
+                        dataType: "json"
+                    }
+                },
+                change: function() {
+                    var view = dataSource.view();
+                    var chartSeries = [];
+                    
+                    for (var i = 1; i < 7; i++) {
+                        chartSeries.push({
+                            data: GetDataForSeries(view, ("ShrPercentage" + i), ("ShrPercentage" + i)),
+                            name: view[0][("Channel" + i)]
+                        });
+                    }
+                    
+                    channelAudienceInTimeChart = $channelAudienceInTimeChart.kendoChart({
+                        theme: global.app.chartsTheme,
+                        renderAs: "svg",
+                        dataSource: view,
+                        title: {
+                            visible: false,
+                            position: "top",
+                            text: ""
+                        },
+                        legend: {
+                            visible: true,
+                            position: "bottom"
+                        },
+                        valueAxis: {
+                            line: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: false
+                            }
+                        },
+                        categoryAxis: {
+                            field: "Week",
+                            majorGridLines: {
+                            visible: false
+                            }
+                        },
+                        chartArea: {
+                            background: "",
+                            width: $("#channelAudienceInTime-chart").width(),
+                            height: 300,
+                            margin: app.emToPx(1)
+                        },
+                        seriesDefaults: {
+                            type: "line"
+                        },
+                        series: chartSeries,
+                        tooltip: {
+                            visible: true,
+                            format: "{0}%"
+                        }
+                    }).data("kendoChart");
+                }
+            });
+            dataSource.read();
+            
+            
+            /*channelAudienceInTimeChart = $channelAudienceInTimeChart.kendoChart({
                 theme: global.app.chartsTheme,
                 renderAs: "svg",
                 dataSource: {
@@ -87,28 +156,23 @@
                     text: ""
                 },
                 legend: {
-                    visible: false
+                    visible: true,
+                    position: "bottom"
                 },
                 valueAxis: {
-                    /*labels: {
-                        format: "N0"
-                    },*/
                     line: {
                         visible: false
                     },
                     minorGridLines: {
                         visible: false
                     }
-                },/*,
+                },
                 categoryAxis: {
                     field: "Week",
-                    labels: {
-                        rotation: -90
-                    },
                     majorGridLines: {
                         visible: false
                     }
-                },*/
+                },
                 chartArea: {
                     background: "",
                     width: $("#channelAudienceInTime-chart").width(),
@@ -120,24 +184,35 @@
                 },
                 series: [
                     {
-                        field: "ShrPercentage",
-                        categoryField: "Week",
-                        name: "#= Channel #"
-                    }/*,
+                        field: "ShrPercentage1",
+                        name: "#: group.field #"
+                    },
                     {
-                        field: "Value2",
+                        field: "ShrPercentage2",
                         name: "#= Channel2 #"
                     },
                     {
-                        field: "Value2",
-                        name: "#= Channel2 #"
-                    }*/
+                        field: "ShrPercentage3",
+                        name: "#= Channel3 #"
+                    },
+                    {
+                        field: "ShrPercentage4",
+                        name: "#= Channel4 #"
+                    },
+                    {
+                        field: "ShrPercentage5",
+                        name: "#= Channel5 #"
+                    },
+                    {
+                        field: "ShrPercentage6",
+                        name: "#= Channel6 #"
+                    }
                 ],
                 tooltip: {
                     visible: true,
                     format: "{0}%"
                 }
-            }).data("kendoChart");
+            }).data("kendoChart");*/
             
         },
         
