@@ -347,8 +347,8 @@
             $(window).off("resize.channelAudienceInTimeChart");
         },
         
-        onCountryClick: function(e){
-            var dataId = e.button.data().id;
+        onCountryClick: function(){
+            var dataId = this.selectedIndex == 0 ? "France" : (this.selectedIndex == 1 ? "USA" : "Japan");
             app.selectedCountry = dataId;
             app.homeViewModel.initializeViewDesign();
         }

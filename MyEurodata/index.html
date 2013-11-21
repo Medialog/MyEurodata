@@ -8,7 +8,6 @@
 
     <!--Once the final theme is chosen the redundant css reference should removed-->
     <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
-    <!--<link href="kendo/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />-->
     <link href="kendo/styles/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="styles/main.css" rel="stylesheet" />
 
@@ -29,6 +28,29 @@
     <div id="tabstrip-general" data-role="view" data-title="By Country" data-model="app.homeViewModel" 
         data-hide="app.homeViewModel.unbindResizeEvent" data-show="app.homeViewModel.initializeViewDesign"
         data-before-show="app.homeViewModel.updateMenu">
+        
+        <!--<div id="rotate_wrapper">
+            <ul id="menu">
+                <li class="menu-item selected france">
+                    <div class="menu-item-div">
+                        <div style="margin-bottom:3px"><img src="styles/images/fr.png" /></div>
+                        <div style="float:left"><label style="">France</label></div>
+                    </div>
+                </li>
+                <li class="menu-item usa">
+                    <div class="menu-item-div">
+                        <div style="margin-bottom:3px"><img src="styles/images/us.png" /></div>
+                        <div style="display:none"><label style="">USA</label></div>
+                    </div>
+                </li>
+                <li class="menu-item japan">
+                    <div class="menu-item-div">
+                        <div style="margin-bottom:3px"><img src="styles/images/jp.png" /></div>
+                        <div style="display:none"><label style="">Japan</label></div>
+                    </div>                    
+                </li>           
+            </ul>
+        </div>-->
         
         <div id="home">
             <div class="row" style="padding-left:10px;padding-right:10px;padding-top:10px;">
@@ -86,7 +108,7 @@
     
     <div id="tabstrip-programs" data-role="view" data-title="By Program" data-layout="programs-tabstrip" data-model="app.programsViewModel" data-show="app.programsViewModel.initializeViewDesign"
         data-before-show="app.programsViewModel.updateMenu">
-    <span>aaaaaaa</span>  
+    
     </div>
     
     <!-- End Programs -->
@@ -130,12 +152,24 @@
         <!--Header-->
         <div data-role="header">
             <div data-role="navbar" style="height:100px;z-index:1000;margin-left:5px;">
-                <div style="padding-left:20px;padding-right:20px;height:100%;vertical-align:middle;position: fixed;width:100%">
+                <div style="float:left;margin-top:20px;height:100%;width:30%">
+                    <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onCountryClick">
+                        <li>
+                            <img src="styles/images/fr.png" /> France
+                        </li>
+                        <li>
+                            <img src="styles/images/us.png" /> USA
+                        </li>
+                        <li>
+                            <img src="styles/images/jp.png" /> Japan
+                        </li>
+                    </ul>
+                </div>
+                <div style="float:left;padding-right:20px;margin-top:20px;height:100%;vertical-align:middle;width:70%;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:25%;font-size:18px;font-weight:bold">My Eurodata TV</td>
-                            <td style="width:50%;text-align:center;font-size:20px"><span data-role="view-title"></span></td>
-                            <td style="width:25%;text-align:right;font-size:12px"><a href="#tabstrip-programs" id="SecondaryViewAnchor">By Program</a></td>
+                            <td style="width:70%;text-align:center;font-size:20px;"><span data-role="view-title"></span></td>
+                            <td style="width:30%;text-align:right;font-size:12px"><a href="#tabstrip-programs" id="SecondaryViewAnchor">By Program</a></td>
                         </tr>
                     </table>
                 </div>

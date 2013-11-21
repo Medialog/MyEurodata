@@ -97,3 +97,67 @@ body, html {
     padding-top: 5px !important;
     padding-bottom: 0px !important;
 }
+
+/*.country-button {
+    padding: 0px 10px 0px 10px !important;
+    font-size:12px;
+    margin:0px
+}*/
+
+
+/* Country Menu */
+
+#rotate_wrapper{
+    height: 300px;
+    position: fixed;
+    z-index: 9999;
+    margin-top:10px;
+}
+
+#menu {list-style:none; padding: 0; border: none;height:100%;width:20px;						
+}
+ 
+#menu li {text-align: center;height: 50px;line-height:50px;}
+
+#menu li .menu-item-div {
+				display: inline-block;
+                cursor:pointer;
+                font-size: 15px; 
+                text-decoration:none; 
+            -webkit-transform: rotate(-90deg);
+                -moz-transform: rotate(-90deg);
+                -ms-transform: rotate(-90deg);
+                -o-transform: rotate(-90deg);
+                filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    height: 50px;
+    width:100%;
+    margin-left:0px;
+    margin-top: 5px;
+    color: black !important;
+}
+
+#menu .selected {
+    width: 40px;
+    height: 200px;
+    background-color: Orange;
+}
+
+#menu .selected .menu-item-div {
+    margin-top: 55px;
+}
+
+.france {
+    background-color: grey;
+}
+
+.usa {
+    background-color: grey;
+}
+
+.japan {
+    background-color: grey;
+}
+
+#menu li:hover{
+    opacity: 0.8
+}
