@@ -125,6 +125,16 @@ body, html {
     content: "\e319";
 }
 
+.km-selected:after,
+.km-selected:before{
+    content: "\e037";
+}
+
+.k-state-selected{
+    background-color: #1984c8;
+}
+
+
 
 /* Country Menu */
 

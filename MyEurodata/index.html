@@ -4,15 +4,15 @@
     <title>Kendo UI DataViz</title>
     <meta charset="UTF-8" />
 
+    <!--<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />-->
     <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet" />
-
-    <!--Once the final theme is chosen the redundant css reference should removed-->
     <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
     <link href="kendo/styles/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="styles/main.css" rel="stylesheet" />
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
+    <!--<script src="kendo/js/kendo.all.min.js"></script>-->
     <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
     <script src="kendo/js/bootstrap.min.js"></script>
 
@@ -135,6 +135,37 @@
         </ul>
     </div>
     
+    <div data-role="drawer" id="countryChannel-drawer" style="width:200px;margin-top:40px" >
+        <div id="channelsCountries">
+            <ul id="countriesChannelsPanelBar"data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    <div onclick="app.programsViewModel.updateSelection">France <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
+                    <ul>
+                        <li>TF1 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                        <li>France 2 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                        <li>France 3 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                    </ul>
+                </li>
+                <li>
+                    <div>USA <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
+                    <ul>
+                        <li>CBS <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                        <li>FOX <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                        <li>Nickelodeon <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                    </ul>
+                </li>
+                <li>
+                    <div>Japan <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
+                    <ul>
+                        <li>NB1 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                        <li>NB2 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                        <li>NB3 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
     <!-- End Drawers -->
     
     <!-- Templates -->
@@ -166,8 +197,8 @@
 
         <!--Header-->
         <div data-role="header">
-            <div data-role="navbar" style="height:100px;z-index:1000;margin-left:5px;">
-                <div style="float:left;margin-top:20px;height:100%;width:30%">
+            <div data-role="navbar" style="height:80px;margin-left:5px;margin-top:20px;">
+                <div data-align="left" style="">
                     <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onCountryClick">
                         <li>
                             <img src="styles/images/fr.png" /> France
@@ -180,14 +211,8 @@
                         </li>
                     </ul>
                 </div>
-                <div style="float:left;padding-right:20px;margin-top:20px;height:100%;vertical-align:middle;width:70%;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:70%;text-align:center;font-size:20px;"><span data-role="view-title"></span></td>
-                            <td style="width:30%;text-align:right;font-size:12px"><a href="#tabstrip-programs" id="SecondaryViewAnchor">By Program</a></td>
-                        </tr>
-                    </table>
-                </div>
+                <span data-role="view-title" data-align="center"></span>
+                <a href="#tabstrip-programs" id="SecondaryViewAnchor" data-align="right">By Program</a>
             </div>
         </div>
 
@@ -221,23 +246,34 @@
 
         <!--Header-->
         <div data-role="header">
-            <div data-role="navbar" style="height:100px;z-index:1000;margin-left:5px;">
-                <div style="padding-left:20px;padding-right:20px;height:100%;vertical-align:middle;position: fixed;width:100%">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:25%;font-size:18px;font-weight:bold">My Eurodata TV</td>
-                            <td style="width:50%;text-align:center;font-size:20px"><span data-role="view-title"></span></td>
-                            <td style="width:25%;text-align:right;font-size:12px"><a href="#tabstrip-general" id="SecondaryViewAnchor">By Country</a></td>
-                        </tr>
-                    </table>
-                </div>
+            <div data-role="navbar" style="height:80px;margin-left:5px;margin-top:20px;">
+                <a data-role="button" data-rel="drawer" href="#countryChannel-drawer" data-icon="drawer-button" data-align="left" style=""></a>
+                <span data-align="center" data-role="view-title"></span>
+                <a data-align="right" href="#tabstrip-general" id="SecondaryViewAnchor" style="">By Country</a>
             </div>
         </div>
 
         <!--Footer-->
         <div data-role="footer">
-            <div data-role="tabstrip">
-                <a href="#tabstrip-general" data-icon="home">Geral</a>
+            <div data-role="navbar">
+                <div data-align="left" style="margin-left:10px;margin-top:10px"><span class="km-icon km-user" style="float:left;margin-right:5px"></span>MyEurodata User</div>
+                <div data-align="center" style="margin-top:10px">
+                    <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onPeriodClick">
+                        <li>
+                            All
+                        </li>
+                        <li>
+                            August
+                        </li>
+                        <li>
+                            September
+                        </li>
+                        <li>
+                            October
+                        </li>
+                    </ul>
+                </div>
+                <a data-align="right" style="margin-right:10px;margin-top:10px" href="#target-popover" data-rel="popover" data-role="button">Targets</a>
             </div>
         </div>
 
