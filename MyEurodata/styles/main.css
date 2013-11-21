@@ -120,6 +120,10 @@ body, html {
         background-color: #000;
     }
 
+.km-user:after,
+.km-user:before{
+    content: "\e319";
+}
 
 
 /* Country Menu */

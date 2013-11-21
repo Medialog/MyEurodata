@@ -13,6 +13,20 @@
         return dataArray;
     };
     
+    function GetDateFilter() {
+        switch (app.period)
+        {
+            case "August":
+                return "&fromDate=2013-08-01&toDate=2013-08-31";
+            case "September":
+                return "&fromDate=2013-09-01&toDate=2013-09-30";
+            case "October":
+                return "&fromDate=2013-10-01&toDate=2013-10-31";
+            default:
+                return "&fromDate=2013-08-01&toDate=2013-10-31";
+        }
+    };
+    
     app.homeViewModel = {
         
         initializeViewDesign: function() {
@@ -69,7 +83,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
+                            url: app.myEurodataAPIUrl + "values/GetTopProgramsAudiences?country=" + app.selectedCountry + GetDateFilter(),
                             dataType: "json"
                         }
                     },
@@ -95,7 +109,7 @@
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: app.myEurodataAPIUrl + "values/GetCountryChannelsWeeksAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
+                        url: app.myEurodataAPIUrl + "values/GetCountryChannelsWeeksAudiences?country=" + app.selectedCountry + GetDateFilter(),
                         dataType: "json"
                     }
                 },
@@ -167,7 +181,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetCountryGenresAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
+                            url: app.myEurodataAPIUrl + "values/GetCountryGenresAudiences?country=" + app.selectedCountry + GetDateFilter(),
                             dataType: "json"
                         }
                     }
@@ -232,7 +246,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetCountryChannelsAudiences?country=" + app.selectedCountry + "&fromDate=2013-08-01&toDate=2013-10-31",
+                            url: app.myEurodataAPIUrl + "values/GetCountryChannelsAudiences?country=" + app.selectedCountry + GetDateFilter(),
                             dataType: "json"
                         }
                     }
@@ -287,6 +301,13 @@
             var dataId = this.selectedIndex == 0 ? "France" : (this.selectedIndex == 1 ? "USA" : "Japan");
             app.selectedCountry = dataId;
             app.homeViewModel.initializeViewDesign();
+        },
+        
+        onPeriodClick: function() {
+            var period = this.selectedIndex == 0 ? "All" : (this.selectedIndex == 1 ? "August" : (this.selectedIndex == 2 ? "September" : "October"));
+            app.period = period;
+            app.homeViewModel.initializeViewDesign();
         }
+        
     };
 })(window, jQuery);

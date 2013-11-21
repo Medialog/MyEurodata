@@ -194,11 +194,25 @@
         <!--Footer-->
         <div data-role="footer">
             <div data-role="navbar">
-                <a data-align="right" style="margin-right:10px;" href="#target-popover" data-rel="popover" data-role="button">Targets</a>
+                <div data-align="left" style="margin-left:10px;margin-top:10px"><span class="km-icon km-user" style="float:left;margin-right:5px"></span>MyEurodata User</div>
+                <div data-align="center" style="margin-top:10px">
+                    <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onPeriodClick">
+                        <li>
+                            All
+                        </li>
+                        <li>
+                            August
+                        </li>
+                        <li>
+                            September
+                        </li>
+                        <li>
+                            October
+                        </li>
+                    </ul>
+                </div>
+                <a data-align="right" style="margin-right:10px;margin-top:10px" href="#target-popover" data-rel="popover" data-role="button">Targets</a>
             </div>
-            <!--<div data-role="tabstrip">
-                <a href="#tabstrip-general" data-icon="home">Geral</a>
-            </div>-->
         </div>
 
     </div>

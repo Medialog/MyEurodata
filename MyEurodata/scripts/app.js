@@ -7,6 +7,8 @@
     app.myEurodataAPIUrl = "http://localhost/MyEurodata2015WebApi/api/";
     
     app.selectedCountry = "France";
+    
+    app.period = "All";
 
     app.chartsTheme = defaultChartTheme;
 
