@@ -20,37 +20,46 @@
     
     app.programsViewModel = {
         
-        initializeViewDesign: function() {     
+        initializeViewDesign: function(e) {     
             $(".km-scroll-header").css("display", "none");
             
             app.programsViewModel.getCountryChannelFilter();
-            
         },
         
         updateMenu: function(){
         },
         
         getProgramsByFilter: function(){
-            var channels = $("#countriesChannelsPanelBar .channel").find(".km-selected").map(function() {
-              return $(this).parent().data().id;
-            }).get().join(',');
-            var period = GetProgramDateFilter();
+            try{
+                $(".km-loader").show();
+                var channels = $("#countriesChannelsPanelBar .channel").find(".km-selected").map(function() {
+                  return $(this).parent().data().id;
+                }).get().join(',');
+                var period = GetProgramDateFilter();
             
-            var tmpl = kendo.template($("#programListContainerTmpl").html());
+                var tmpl = kendo.template($("#programListContainerTmpl").html());
             
-            var dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: app.myEurodataAPIUrl + "values/GetProgramsDataByChannelsTargetsAndPeriod?channels="+ channels + "&targets=1" + GetProgramDateFilter(),
-                        dataType: "json"
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: app.myEurodataAPIUrl + "values/GetProgramsDataByChannelsTargetsAndPeriod?channels="+ channels + "&targets=1" + GetProgramDateFilter(),
+                            dataType: "json"
+                        }
+                    },
+                    change: function() {
+                        var result = tmpl(dataSource.view());
+                        $("#programListContainer").html(result);
+                        $(".km-loader").hide();
                     }
-                },
-                change: function() {
-                    var result = tmpl(dataSource.view());
-                    $("#programListContainer").html(result);
-                }
-            });
-            dataSource.read();
+                });
+                dataSource.read();
+            }
+            catch(exc){
+                $(".km-loader").hide();
+            }
+            finally{
+                
+            }
             
         },
         
