@@ -192,3 +192,10 @@ body, html {
 #menu li:hover{
     opacity: 0.8
 }
+
+
+/* Program List */
+
+.program-tile{
+    height: 100px
+}

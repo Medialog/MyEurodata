@@ -35,6 +35,23 @@
               return $(this).parent().data().id;
             }).get().join(',');
             var period = GetProgramDateFilter();
+            
+            var tmpl = kendo.template($("#programListContainerTmpl").html());
+            
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: app.myEurodataAPIUrl + "values/GetProgramsDataByChannelsTargetsAndPeriod?channels="+ channels + "&targets=1" + GetProgramDateFilter(),
+                        dataType: "json"
+                    }
+                },
+                change: function() {
+                    var result = tmpl(dataSource.view());
+                    $("#programListContainer").html(result);
+                }
+            });
+            dataSource.read();
+            
         },
         
         onPeriodClick: function() {
