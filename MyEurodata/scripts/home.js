@@ -26,7 +26,7 @@
                 return "&fromDate=2013-08-01&toDate=2013-10-31";
         }
     };
-    
+        
     app.homeViewModel = {
         
         initializeViewDesign: function() {

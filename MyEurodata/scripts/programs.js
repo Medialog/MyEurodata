@@ -1,25 +1,51 @@
 (function (global, $) {
     
+    var countryChannelFilterLoaded = false;
+    
+    function GetProgramDateFilter() {
+        switch (app.programPeriod)
+        {
+            case "August":
+                return "&fromDate=2013-08-01&toDate=2013-08-31";
+            case "September":
+                return "&fromDate=2013-09-01&toDate=2013-09-30";
+            case "October":
+                return "&fromDate=2013-10-01&toDate=2013-10-31";
+            default:
+                return "&fromDate=2013-08-01&toDate=2013-10-31";
+        }
+    };
+    
     app = global.app = global.app || {};
     
     app.programsViewModel = {
-        initializeViewDesign: function() {        
+        
+        initializeViewDesign: function() {     
             $(".km-scroll-header").css("display", "none");
             
             app.programsViewModel.getCountryChannelFilter();
+            
         },
         
         updateMenu: function(){
+        },
+        
+        getProgramsByFilter: function(){
+            var channels = $("#countriesChannelsPanelBar .channel").find(".km-selected").map(function() {
+              return $(this).parent().data().id;
+            }).get().join(',');
+            var period = GetProgramDateFilter();
         },
         
         onPeriodClick: function() {
             var period = this.selectedIndex == 0 ? "All" : (this.selectedIndex == 1 ? "August" : (this.selectedIndex == 2 ? "September" : "October"));
             app.programPeriod = period;
             app.programsViewModel.initializeViewDesign();
+            app.programsViewModel.getProgramsByFilter();
         },
                
         getCountryChannelFilter: function(){
-            
+            if(app.programsViewModel.countryChannelFilterLoaded) return;
             $("#countriesChannelsPanelBar").kendoMobileListView({
                 dataSource: {
                     transport: {
@@ -47,6 +73,7 @@
                             $(this).find("span").addClass("km-selected");
                             $(this).parent().parent().next().find("li span").addClass("km-selected");    
                         }
+                        app.programsViewModel.getProgramsByFilter();
                     });
             
                     $("#countriesChannelsPanelBar .channel").on("click", function(){
@@ -66,9 +93,13 @@
                            $(this).parent().prev().find("span").addClass("km-selected");
                         if(active == 0 && inactive > 0)
                             $(this).parent().prev().find("span").removeClass("km-selected");
+                        app.programsViewModel.getProgramsByFilter();
                     });
+                    
+                    app.programsViewModel.getProgramsByFilter();
                 }
-            });  
+            });
+            app.programsViewModel.countryChannelFilterLoaded = true;
         }
     };
 
