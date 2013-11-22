@@ -137,31 +137,7 @@
     
     <div data-role="drawer" id="countryChannel-drawer" style="width:200px;margin-top:40px" >
         <div id="channelsCountries">
-            <ul id="countriesChannelsPanelBar"data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    <div class="country">France <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
-                    <ul>
-                        <li class="channel" data-id="1">TF1 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                        <li class="channel">France 2 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                        <li class="channel">France 3 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="country">USA <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
-                    <ul>
-                        <li class="channel">CBS <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                        <li class="channel">FOX <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                        <li class="channel">Nickelodeon <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="country">Japan <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
-                    <ul>
-                        <li class="channel">NB1 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                        <li class="channel">NB2 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                        <li class="channel">NB3 <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                    </ul>
-                </li>
+            <ul id="countriesChannelsPanelBar"data-role="listview" data-style="inset" data-type="group" data-click="app.programsViewModel.countriesChannelsPanelBarClick">
             </ul>
         </div>
     </div>
@@ -185,8 +161,30 @@
         <div style="clear:both"></div>
     </script>
     
-    <script id="targetsListViewTmpl" type="text/x-kendo-tmpl">
+    <script id="targetsListViewTmpl" type="text/x-kendo-template">
         <label style="color:\\#4D4D4D;font-size:11px">#: Name # <input name="targetSelected" type="radio" checked></label>
+    </script>
+    
+    <script id="countryChannelFilterTmpl___" type="text/x-kendo-template">
+        #for (var j = 0; j < data.length; j++) { if(data[j].Region != app.CurrentTemplateCountry ) {#
+        # app.CurrentTemplateCountry = data[j].Region; #
+            <li>
+                <div class="country">#: Region# <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
+                <ul>
+                    # for (var i = 0; i < data.length; i++) { if(data[i].Region == app.CurrentTemplateCountry ) {#
+                    <li class="channel" data-id="1">#:Channel# <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
+                    #} }#
+                </ul>
+            </li>
+        #} }#
+    </script>
+    
+    <script id="countryChannelFilterHeaderTmpl" type="text/x-kendo-template">
+        <div class="country">${ value } <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
+    </script>
+    
+    <script id="countryChannelFilterTmpl" type="text/x-kendo-template">
+        <li class="channel" data-id="1">${ Channel} <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
     </script>
     
     <!-- End Templates -->

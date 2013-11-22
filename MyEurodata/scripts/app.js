@@ -9,6 +9,8 @@
     app.selectedCountry = "France";
     
     app.period = "All";
+    
+    app.CurrentTemplateCountry = "";
 
     app.chartsTheme = defaultChartTheme;
 
