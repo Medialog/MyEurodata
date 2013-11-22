@@ -197,5 +197,30 @@ body, html {
 /* Program List */
 
 .program-tile{
-    height: 100px
+    height: 140px
 }
+
+.program-tile h5{
+    color: #333;
+    font-size: 11px;
+    text-align: left;
+}
+
+.program-tile h3{
+    color: #1984c8;
+    font-size: 14px;
+    text-align: left;
+}
+
+.program-tile .social{
+    text-align: left;
+    margin-left: 10px;
+    
+}
+
+.program-tile .social span{
+    float:left;
+    font-size: 11px;
+    color: #1984c8;
+}
+

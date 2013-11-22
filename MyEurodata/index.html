@@ -178,7 +178,23 @@
         # for(var i=0; i<data.length; i++){#
         <div class="col-xs-8 col-sm-6 col-md-4" >
             <div class="panel panel-default program-tile">
-                #= data[i].Audiences.Program #
+                <h5>#= data[i].Audiences.Region # - #= data[i].Audiences.Channel #</h5>
+                <h3>#= data[i].Audiences.Program #</h3>
+                <h5>#= data[i].Audiences.ShrPercentage #% Shr - #= data[i].Audiences.RatPercentage #% Rat</h5>
+                <div class="social">
+                    <span class="km-icon km-share"></span>
+                    # if(data[i].FacebookMetrics.Likes != undefined) { #
+                    <span> # data[i].FacebookMetrics.Likes # Likes</span>
+                    # } else {#
+                    <span>No social information</span>
+                    #}#
+                    # if(data[i].FacebookMetrics.TalkingAbout != undefined) { #
+                    <span> # data[i].FacebookMetrics.TalkingAbout # Talking Abouts</span>
+                    # } #
+                    # if(data[i].FacebookMetrics.Timestamp != undefined) { #
+                    <span> Last updated in: # data[i].FacebookMetrics.Timestamp #</span>
+                    # } #
+                </div>
             </div>
         </div>
         #}#
