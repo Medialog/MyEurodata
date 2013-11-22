@@ -24,7 +24,9 @@
         initializeViewDesign: function(e) {     
             $(".km-scroll-header").css("display", "none");
             
+            //app.programsViewModel.bindProgramListTargets();
             app.programsViewModel.getCountryChannelFilter();
+            
         },
         
         updateMenu: function(){
@@ -36,14 +38,18 @@
                 var channels = $("#countriesChannelsPanelBar .channel").find(".km-selected").map(function() {
                   return $(this).parent().data().id;
                 }).get().join(',');
+                if(channels.length == 0) channels = "none";
                 var period = GetProgramDateFilter();
-            
+                var targets = $("#programListTargetsListView").data("kendoMobileListView").items().map(function() {
+                  return $(this).find("input").data().id;
+                }).get().join(',');
+                if(targets.length == 0) targets = "-1";
                 var tmpl = kendo.template($("#programListContainerTmpl").html());
             
                 var dataSource = new kendo.data.DataSource({
                     transport: {
                         read: {
-                            url: app.myEurodataAPIUrl + "values/GetProgramsDataByChannelsTargetsAndPeriod?channels="+ channels + "&targets=1" + GetProgramDateFilter(),
+                            url: app.myEurodataAPIUrl + "values/GetProgramsDataByChannelsTargetsAndPeriod?channels="+ channels + "&targets=" + targets + GetProgramDateFilter(),
                             dataType: "json"
                         }
                     },
@@ -79,11 +85,12 @@
                 },
                 change: function(){
                     var d = dataSource.view();
-                    if(app.programsViewModel.programTargetsLoaded){
+                    if(app.programsViewModel.programTargetsLoaded && d.length > 0){
                         $("#programListTargetsListView").data("kendoMobileListView").items().each(function(index){
                             $(this).find("input").attr("data-id", d[index].Codes);
                         });
                     }
+                    app.programsViewModel.getProgramsByFilter();
                 }
             });
             
@@ -105,6 +112,10 @@
                     template: $("#programListTargetsListViewTmpl").html(),
                     dataBound: function(e) {
                         app.programsViewModel.programTargetsLoaded = true;
+                        app.programsViewModel.getProgramsByFilter();
+                    },
+                    click: function(e) {
+                        app.programsViewModel.getProgramsByFilter();
                     }
                 }).kendoTouch({
                     filter: ">li",
@@ -154,7 +165,7 @@
                             $(this).parent().parent().next().find("li span").addClass("km-selected");    
                         }
                         app.programsViewModel.bindProgramListTargets();
-                        app.programsViewModel.getProgramsByFilter();
+                        //app.programsViewModel.getProgramsByFilter();
                     });
             
                     $("#countriesChannelsPanelBar .channel").on("click", function(){
@@ -170,15 +181,15 @@
                             else
                                 inactive++;
                         });
-                        if(active > 0 && inactive == 0)
+                        if(active > 0)
                            $(this).parent().prev().find("span").addClass("km-selected");
                         if(active == 0 && inactive > 0)
                             $(this).parent().prev().find("span").removeClass("km-selected");
                         app.programsViewModel.bindProgramListTargets();
-                        app.programsViewModel.getProgramsByFilter();
+                        //app.programsViewModel.getProgramsByFilter();
                     });
                     app.programsViewModel.bindProgramListTargets();
-                    app.programsViewModel.getProgramsByFilter();
+                    //app.programsViewModel.getProgramsByFilter();
                 }
             });
             app.programsViewModel.countryChannelFilterLoaded = true;

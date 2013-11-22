@@ -195,16 +195,18 @@
                 <h5>#= data[i].Audiences.ShrPercentage #% Shr - #= data[i].Audiences.RatPercentage #% Rat</h5>
                 <div class="social">
                     <span class="km-icon km-share"></span>
-                    # if(data[i].FacebookMetrics.Likes != undefined) { #
-                    <span> # data[i].FacebookMetrics.Likes # Likes</span>
+                    # if(data[i].FacebookMetrics != undefined && data[i].FacebookMetrics.length > 0) { #
+                    <span style="margin-left:5px"> #= data[i].FacebookMetrics[data[i].FacebookMetrics.length-1].Likes.toString() # Likes</span>
                     # } else {#
                     <span>No social information</span>
                     #}#
-                    # if(data[i].FacebookMetrics.TalkingAbout != undefined) { #
-                    <span> # data[i].FacebookMetrics.TalkingAbout # Talking Abouts</span>
+                    <span style="width:20px"></span>
+                    # if(data[i].FacebookMetrics != undefined && data[i].FacebookMetrics.length > 0) { #
+                    <span style="margin-left:15px"> #= data[i].FacebookMetrics[data[i].FacebookMetrics.length-1].TalkingAbout.toString() # Talking Abouts</span>
                     # } #
-                    # if(data[i].FacebookMetrics.Timestamp != undefined) { #
-                    <span> Last updated in: # data[i].FacebookMetrics.Timestamp #</span>
+                    <div style="clear:both"></div>
+                    # if(data[i].FacebookMetrics != undefined && data[i].FacebookMetrics.length > 0) { #
+                    <span style="margin-left:15px"> Last update in: #= data[i].FacebookMetrics[data[i].FacebookMetrics.length-1].Timestamp #</span>
                     # } #
                 </div>
             </div>
