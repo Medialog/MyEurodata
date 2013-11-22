@@ -1,6 +1,7 @@
 (function (global, $) {
     
     var countryChannelFilterLoaded = false;
+    var programTargetsLoaded = false;
     
     function GetProgramDateFilter() {
         switch (app.programPeriod)
@@ -63,6 +64,59 @@
             
         },
         
+        bindProgramListTargets: function() {
+            
+            var countries = $("#countriesChannelsPanelBar .country").find(".km-selected").map(function() {
+                  return $(this).parent().data().id;
+                }).get().join(',');
+            
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: app.myEurodataAPIUrl + "values/GetMainTargets?countriesNames=" + countries,
+                        dataType: "json"
+                    }
+                },
+                change: function(){
+                    var d = dataSource.view();
+                    if(app.programsViewModel.programTargetsLoaded){
+                        $("#programListTargetsListView").data("kendoMobileListView").items().each(function(index){
+                            $(this).find("input").attr("data-id", d[index].Codes);
+                        });
+                    }
+                }
+            });
+            
+            var selected = [];
+            if(app.programsViewModel.programTargetsLoaded){
+                $("#programListTargetsListView").data("kendoMobileListView").items().each(function(){
+                    selected.push($(this).find("input").attr("checked"))
+                });
+            } else
+                selected = ["checked", "checked", "checked"];
+            
+            if(app.programsViewModel.programTargetsLoaded){
+                dataSource.read();
+                return;
+            }
+            
+            $("#programListTargetsListView").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#programListTargetsListViewTmpl").html(),
+                    dataBound: function(e) {
+                        app.programsViewModel.programTargetsLoaded = true;
+                    }
+                }).kendoTouch({
+                    filter: ">li",
+                    enableSwipe: false,
+                    tap: function(e){
+                        //app.homeViewModel.closeFilterPopover(e);
+                        //var vendorName = $(e.touch.currentTarget).find("label").text();
+                        //kendo.mobile.application.navigate("#tabstrip-vendor?uid=" + vendorName);
+                    }
+                });
+        },
+        
         onPeriodClick: function() {
             var period = this.selectedIndex == 0 ? "All" : (this.selectedIndex == 1 ? "August" : (this.selectedIndex == 2 ? "September" : "October"));
             app.programPeriod = period;
@@ -99,6 +153,7 @@
                             $(this).find("span").addClass("km-selected");
                             $(this).parent().parent().next().find("li span").addClass("km-selected");    
                         }
+                        app.programsViewModel.bindProgramListTargets();
                         app.programsViewModel.getProgramsByFilter();
                     });
             
@@ -119,9 +174,10 @@
                            $(this).parent().prev().find("span").addClass("km-selected");
                         if(active == 0 && inactive > 0)
                             $(this).parent().prev().find("span").removeClass("km-selected");
+                        app.programsViewModel.bindProgramListTargets();
                         app.programsViewModel.getProgramsByFilter();
                     });
-                    
+                    app.programsViewModel.bindProgramListTargets();
                     app.programsViewModel.getProgramsByFilter();
                 }
             });

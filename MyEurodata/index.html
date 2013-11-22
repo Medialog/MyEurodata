@@ -121,6 +121,18 @@
             <div id="programListContainer" class="row" style="padding:10px;">
             </div>
         </div>
+        
+        <!-- Popovers -->
+        
+        <div data-role="popover" id="programs-target-popover" data-popup='{"height": "10em", "width": "20em"}'>
+            <div data-role="view" data-title="Targets">
+                <ul data-role="listview" id="programListTargetsListView">
+                </ul>
+            </div>
+        </div>
+        
+        <!-- End Popovers -->
+        
     </div>
     
     <!-- End Programs -->
@@ -167,7 +179,7 @@
     </script>
        
     <script id="countryChannelFilterHeaderTmpl" type="text/x-kendo-template">
-        <div class="country">${ value } <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
+        <div class="country" data-id="${ value }">${ value } <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
     </script>
     
     <script id="countryChannelFilterTmpl" type="text/x-kendo-template">
@@ -198,6 +210,10 @@
             </div>
         </div>
         #}#
+    </script>
+    
+    <script id="programListTargetsListViewTmpl" type="text/x-kendo-template">
+        <label style="color:\\#4D4D4D;font-size:11px">#: Target # <input name="#: Target #" data-target="#: Target #" data-id="#: Codes #" type="checkbox" checked="checked"></label>
     </script>
     
     <!-- End Templates -->
@@ -284,7 +300,7 @@
                         </li>
                     </ul>
                 </div>
-                <a data-align="right" style="margin-right:10px;margin-top:10px" href="#target-popover" data-rel="popover" data-role="button">Targets</a>
+                <a data-align="right" style="margin-right:10px;margin-top:10px" href="#programs-target-popover" data-rel="popover" data-role="button">Targets</a>
             </div>
         </div>
 
