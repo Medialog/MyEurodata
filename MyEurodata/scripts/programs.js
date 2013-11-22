@@ -3,6 +3,8 @@
     var countryChannelFilterLoaded = false;
     var programTargetsLoaded = false;
     
+    var programData = null;
+    
     function GetProgramDateFilter() {
         switch (app.programPeriod)
         {
@@ -32,6 +34,67 @@
         updateMenu: function(){
         },
         
+        createSocialChart: function(data){
+            for(var idx=0; idx<data.length; idx++)
+            {
+                if(data[idx].FacebookMetrics.length < 2)
+                    continue;
+                var chart = $(".program-tile[data-id="+idx+"]").find(".social-chart");
+                $(chart).kendoChart({
+                    theme: global.app.chartsTheme,
+                    /*renderAs: "svg",*/
+                    dataSource: data[idx].FacebookMetrics,
+                        title: {
+                            visible: false,
+                            position: "top",
+                            text: ""
+                        },
+                        legend: {
+                            visible: true,
+                            position: "bottom"
+                        },
+                        valueAxis: {
+                            line: { visible: false },
+                            minorGridLines: { visible: false }
+                        },
+                        categoryAxis: {
+                            field: "Timestamp",
+                             labels:{
+                                 template: '#: data.value.substring(0,10) #',
+                                 rotation: -90,
+                                 visible: false
+                            },
+                            majorGridLines: { visible: false }
+                        },
+                        chartArea: {
+                            background: "",
+                            width: $(chart).width(),
+                            height: $(chart).height(),
+                            margin: app.emToPx(1)
+                        },
+                        /*seriesDefaults: {
+                            type: "area"
+                        },*/
+                        series: [
+                            {
+                                type: "area",
+                                name: "Likes",
+                                field: "Likes",
+                                color: "#73c100",
+                            }/*,
+                            {
+                                type: "area",
+                                field: "TalkingAbout",
+                                color: "#007eff",
+                            }*/
+                        ],
+                        tooltip: {
+                            visible: true
+                        }
+                    }).data("kendoChart");
+            }
+        },
+        
         getProgramsByFilter: function(){
             try{
                 $(".km-loader").show();
@@ -54,8 +117,15 @@
                         }
                     },
                     change: function() {
-                        var result = tmpl(dataSource.view());
+                        app.programsViewModel.programData = dataSource.view();
+                        var result = tmpl(app.programsViewModel.programData);
                         $("#programListContainer").html(result);
+                        /*$(".program-tile").kendoTouch({
+                            enableSwipe: false,
+                            tap: function(e){
+                                app.programsViewModel.openProgram(e);
+                            }
+                        });*/
                         $(".km-loader").hide();
                     }
                 });
@@ -165,7 +235,6 @@
                             $(this).parent().parent().next().find("li span").addClass("km-selected");    
                         }
                         app.programsViewModel.bindProgramListTargets();
-                        //app.programsViewModel.getProgramsByFilter();
                     });
             
                     $("#countriesChannelsPanelBar .channel").on("click", function(){
@@ -186,13 +255,19 @@
                         if(active == 0 && inactive > 0)
                             $(this).parent().prev().find("span").removeClass("km-selected");
                         app.programsViewModel.bindProgramListTargets();
-                        //app.programsViewModel.getProgramsByFilter();
                     });
                     app.programsViewModel.bindProgramListTargets();
-                    //app.programsViewModel.getProgramsByFilter();
                 }
             });
             app.programsViewModel.countryChannelFilterLoaded = true;
+        },
+        
+        onOpenProgram: function(e){
+            //alert("aa");
+            var idx =  $(e.target.context).find(".program-tile").data().id;
+            var elem = app.programsViewModel.programData[idx];
+            $(e.sender.header).find(".km-view-title span").text(elem.Program);
+            
         }
     };
 
