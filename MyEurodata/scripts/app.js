@@ -10,6 +10,8 @@
     
     app.period = "All";
     
+    app.programPeriod = "All";
+    
     app.CurrentTemplateCountry = "";
 
     app.chartsTheme = defaultChartTheme;

@@ -38,6 +38,8 @@
             
             app.homeViewModel.createChannelAudienceInTimeChart();
             
+            app.homeViewModel.bindTargets();
+            
             app.homeViewModel.bindResizeEvent();
             
             $(".km-scroll-header").css("display", "none");
@@ -48,11 +50,11 @@
         },
         
         bindTargets: function() {
-            if(app.homeViewModel.targetsLoaded) return;
+            //if(app.homeViewModel.targetsLoaded) return;
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "data/targets.json",
+                        url: app.myEurodataAPIUrl + "values/GetCountryTargets?country=" + app.selectedCountry,
                         dataType: "json"
                     }
                 } 
@@ -70,7 +72,7 @@
                         //kendo.mobile.application.navigate("#tabstrip-vendor?uid=" + vendorName);
                     }
                 });
-            app.homeViewModel.targetsLoaded = true;
+            //app.homeViewModel.targetsLoaded = true;
         },
         
         closeFilterPopover: function(e) {

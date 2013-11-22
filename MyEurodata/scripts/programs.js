@@ -12,8 +12,10 @@
         updateMenu: function(){
         },
         
-        updateSelection: function(s){
-            alert(s.data().id);
+        onPeriodClick: function() {
+            var period = this.selectedIndex == 0 ? "All" : (this.selectedIndex == 1 ? "August" : (this.selectedIndex == 2 ? "September" : "October"));
+            app.programPeriod = period;
+            app.programsViewModel.initializeViewDesign();
         },
                
         getCountryChannelFilter: function(){

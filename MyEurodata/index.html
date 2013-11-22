@@ -4,7 +4,6 @@
     <title>Kendo UI DataViz</title>
     <meta charset="UTF-8" />
 
-    <!--<link href="kendo/styles/kendo.common.min.css" rel="stylesheet" />-->
     <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet" />
     <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
     <link href="kendo/styles/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -12,7 +11,6 @@
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
-    <!--<script src="kendo/js/kendo.all.min.js"></script>-->
     <script src="kendo/js/kendo.dataviz.mobile.min.js"></script>
     <script src="kendo/js/bootstrap.min.js"></script>
 
@@ -195,23 +193,9 @@
     </script>
     
     <script id="targetsListViewTmpl" type="text/x-kendo-template">
-        <label style="color:\\#4D4D4D;font-size:11px">#: Name # <input name="targetSelected" type="radio" checked></label>
+        <label style="color:\\#4D4D4D;font-size:11px">#: Target # <input name="targetSelected" type="radio" checked></label>
     </script>
-    
-    <script id="countryChannelFilterTmpl___" type="text/x-kendo-template">
-        #for (var j = 0; j < data.length; j++) { if(data[j].Region != app.CurrentTemplateCountry ) {#
-        # app.CurrentTemplateCountry = data[j].Region; #
-            <li>
-                <div class="country">#: Region# <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
-                <ul>
-                    # for (var i = 0; i < data.length; i++) { if(data[i].Region == app.CurrentTemplateCountry ) {#
-                    <li class="channel" data-id="1">#:Channel# <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></li>
-                    #} }#
-                </ul>
-            </li>
-        #} }#
-    </script>
-    
+       
     <script id="countryChannelFilterHeaderTmpl" type="text/x-kendo-template">
         <div class="country">${ value } <span style="float:right;margin-right:5px" class="km-icon km-selected"></span></div>
     </script>
@@ -289,7 +273,7 @@
             <div data-role="navbar">
                 <div data-align="left" style="margin-left:10px;margin-top:10px"><span class="km-icon km-user" style="float:left;margin-right:5px"></span>MyEurodata User</div>
                 <div data-align="center" style="margin-top:10px">
-                    <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onPeriodClick">
+                    <ul data-role="buttongroup" data-index="0" data-select="app.programsViewModel.onPeriodClick">
                         <li>
                             All
                         </li>
