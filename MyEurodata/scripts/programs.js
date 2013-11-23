@@ -254,17 +254,74 @@
             });
             app.programsViewModel.countryChannelFilterLoaded = true;
         },
-        
-        onCountryChannelClick: function(e){
-          console.log(e);  
-        },
-        
+                
         onOpenProgram: function(e){
-            //alert("aa");
             var idx =  $(e.target.context).find(".program-tile").data().id;
             var elem = app.programsViewModel.programData[idx];
             $(e.sender.header).find(".km-view-title span").text(elem.Program);
-            
+            var chart = $(e.sender.element).find("#program-chart");
+            if(elem.FacebookMetrics.length < 2)
+            {
+                $(chart).data("kendoChart").destroy();
+                $(chart).css("display", "none");
+                return;    
+            }
+            $(chart).css("display", "block");
+            $(window).resize(function() 
+            {    
+                var chart = $(chart).data("kendoChart");
+                chart.refresh();
+            });
+            $(chart).kendoChart({
+                theme: global.app.chartsTheme,
+                renderAs: "svg",
+                dataSource: elem.FacebookMetrics,
+                title: {
+                    visible: false,
+                    position: "top",
+                    text: ""
+                },
+                legend: {
+                    visible: true,
+                    position: "bottom"
+                },
+                valueAxis: {
+                    line: { visible: false },
+                    minorGridLines: { visible: false }
+                },
+                categoryAxis: {
+                    field: "Timestamp",
+                    labels:{
+                        template: '#: data.value.substring(0,10) #',
+                        /*rotation: -90,*/
+                        visible: true
+                    },
+                    majorGridLines: { visible: false }
+                },
+                chartArea: {
+                    background: "",
+                    width: $(chart).width(),
+                    height: $(chart).height(),
+                    margin: app.emToPx(1)
+                },
+                series: [
+                    {
+                        type: "line",
+                        name: "Likes",
+                        field: "Likes",
+                        color: "#73c100",
+                    },
+                    {
+                        type: "line",
+                        name: "TalkingAbout",
+                        field: "TalkingAbout",
+                        color: "#007eff",
+                    }
+                ],
+                tooltip: {
+                    visible: true
+                }
+            }).data("kendoChart");
         }
     };
 

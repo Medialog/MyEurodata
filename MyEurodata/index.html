@@ -27,29 +27,6 @@
         data-hide="app.homeViewModel.unbindResizeEvent" data-show="app.homeViewModel.initializeViewDesign"
         data-before-show="app.homeViewModel.updateMenu">
         
-        <!--<div id="rotate_wrapper">
-            <ul id="menu">
-                <li class="menu-item selected france">
-                    <div class="menu-item-div">
-                        <div style="margin-bottom:3px"><img src="styles/images/fr.png" /></div>
-                        <div style="float:left"><label style="">France</label></div>
-                    </div>
-                </li>
-                <li class="menu-item usa">
-                    <div class="menu-item-div">
-                        <div style="margin-bottom:3px"><img src="styles/images/us.png" /></div>
-                        <div style="display:none"><label style="">USA</label></div>
-                    </div>
-                </li>
-                <li class="menu-item japan">
-                    <div class="menu-item-div">
-                        <div style="margin-bottom:3px"><img src="styles/images/jp.png" /></div>
-                        <div style="display:none"><label style="">Japan</label></div>
-                    </div>                    
-                </li>           
-            </ul>
-        </div>-->
-        
         <div id="home">
             <div class="row" style="padding-left:10px;padding-right:10px;padding-top:10px;">
                 <div class="col-xs-12 col-sm-6 col-md-6" >
@@ -235,18 +212,19 @@
     
     <!-- End Templates -->
     
-    <div data-role="modalview" id="modalview-program" style="width: 70%;height:50%;display:none" data-modal="false" data-open="app.programsViewModel.onOpenProgram">
+    <div data-role="modalview" id="modalview-program" style="width: 70%;height:70%;display:none" data-modal="false" data-open="app.programsViewModel.onOpenProgram">
         <div data-role="header">
             <div data-role="navbar">
                 <span>Program</span>
                 <a data-click="closeModalViewProgram" data-role="button" data-align="right">Close</a>
             </div>
         </div>
-
-        <ul data-role="listview" data-style="inset">
-            <li><label for="username">Username: <input type="text" id="username" /></label></li>
-            <li><label for="password">Password: <input type="password" id="password" /></label></li>
-        </ul>
+        <div class="row" style="padding:10px 20px 10px 20px">
+            <div class="panel panel-default">
+                <div id="program-chart" style="width:100%;height:300px;display:none"></div>
+            </div>
+        </div>
+        
     </div>
     
     
