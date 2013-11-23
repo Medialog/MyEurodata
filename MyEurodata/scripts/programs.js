@@ -26,7 +26,6 @@
         initializeViewDesign: function(e) {     
             $(".km-scroll-header").css("display", "none");
             
-            //app.programsViewModel.bindProgramListTargets();
             app.programsViewModel.getCountryChannelFilter();
             
         },
@@ -120,12 +119,6 @@
                         app.programsViewModel.programData = dataSource.view();
                         var result = tmpl(app.programsViewModel.programData);
                         $("#programListContainer").html(result);
-                        /*$(".program-tile").kendoTouch({
-                            enableSwipe: false,
-                            tap: function(e){
-                                app.programsViewModel.openProgram(e);
-                            }
-                        });*/
                         $(".km-loader").hide();
                     }
                 });
@@ -164,14 +157,6 @@
                 }
             });
             
-            /*var selected = [];
-            if(app.programsViewModel.programTargetsLoaded){
-                $("#programListTargetsListView").data("kendoMobileListView").items().each(function(){
-                    selected.push($(this).find("input").attr("checked"))
-                });
-            } else
-                selected = ["checked", "checked", "checked"];*/
-            
             if(app.programsViewModel.programTargetsLoaded){
                 dataSource.read();
                 return;
@@ -183,10 +168,7 @@
                     dataBound: function(e) {
                         app.programsViewModel.programTargetsLoaded = true;
                         app.programsViewModel.getProgramsByFilter();
-                    }/*,
-                    click: function(e) {
-                        app.programsViewModel.getProgramsByFilter();
-                    }*/
+                    }
                 }).kendoTouch({
                     filter: ">li",
                     enableSwipe: false,
@@ -196,9 +178,6 @@
                         else
                             $(e.touch.currentTarget).find("input").attr("data-check", "1");
                         app.programsViewModel.getProgramsByFilter();
-                        //app.homeViewModel.closeFilterPopover(e);
-                        //var vendorName = $(e.touch.currentTarget).find("label").text();
-                        //kendo.mobile.application.navigate("#tabstrip-vendor?uid=" + vendorName);
                     }
                 });
         },
@@ -228,43 +207,56 @@
                 headerTemplate: $("#countryChannelFilterHeaderTmpl").html(),
                 template: $("#countryChannelFilterTmpl").html(),
                 dataBound: function(e) {
-                    $("#countriesChannelsPanelBar .country").on("click", function(){
-                        if($(this).find("span").hasClass("km-selected"))
+                    app.programsViewModel.bindProgramListTargets();
+                }
+            }).kendoTouch({
+                filter: ">li",
+                enableSwipe: false,
+                tap: function(e){
+                    console.log(e);
+                    if($(e.event.target).hasClass("country"))
+                    {
+                        var c = $(e.event.target);
+                        if($(c).find("span").hasClass("km-selected"))
                         {
-                            $(this).find("span").removeClass("km-selected");
-                            $(this).parent().parent().next().find("li span").removeClass("km-selected");
+                            $(c).find("span").removeClass("km-selected");
+                            $(c).parent().parent().next().find("li span").removeClass("km-selected");
                         }
                         else
                         {
-                            $(this).find("span").addClass("km-selected");
-                            $(this).parent().parent().next().find("li span").addClass("km-selected");    
+                            $(c).find("span").addClass("km-selected");
+                            $(c).parent().parent().next().find("li span").addClass("km-selected");    
                         }
                         app.programsViewModel.bindProgramListTargets();
-                    });
-            
-                    $("#countriesChannelsPanelBar .channel").on("click", function(){
-                        if($(this).find("span").hasClass("km-selected"))
-                            $(this).find("span").removeClass("km-selected");
+                    }
+                    else
+                    {
+                        var c = $(e.event.target);
+                        if($(c).find("span").hasClass("km-selected"))
+                            $(c).find("span").removeClass("km-selected");
                         else
-                            $(this).find("span").addClass("km-selected");
+                            $(c).find("span").addClass("km-selected");
                         var active = 0;
                         var inactive = 0;
-                        $(this).parent().find("li span").each(function( index ) {
-                            if($(this).hasClass("km-selected"))
+                        $(c).parent().find("li span").each(function( index ) {
+                            if($(c).hasClass("km-selected"))
                                 active++;
                             else
                                 inactive++;
                         });
                         if(active > 0)
-                           $(this).parent().prev().find("span").addClass("km-selected");
+                           $(c).parent().prev().find("span").addClass("km-selected");
                         if(active == 0 && inactive > 0)
-                            $(this).parent().prev().find("span").removeClass("km-selected");
+                            $(c).parent().prev().find("span").removeClass("km-selected");
                         app.programsViewModel.bindProgramListTargets();
-                    });
-                    app.programsViewModel.bindProgramListTargets();
+                    }
                 }
             });
             app.programsViewModel.countryChannelFilterLoaded = true;
+        },
+        
+        onCountryChannelClick: function(e){
+          console.log(e);  
         },
         
         onOpenProgram: function(e){
