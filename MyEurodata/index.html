@@ -183,23 +183,6 @@
                     <div style="float:left"><label style="font-size:10px">#= data[i].FacebookLikesTrend == -2 ? "" :"Likes"#</label><label style="color:#= data[i].FacebookLikesTrend==-1 ? "red" : (data[i].FacebookLikesTrend==1 ? "green" : "grey") #">#= data[i].FacebookLikesTrend == -2 ? "" : (data[i].FacebookLikesTrend == -1 ? "▼" : (data[i].FacebookLikesTrend == 1 ? "▲" : "=")) #</label></div>
                     <div style="float:left"><label style="font-size:10px">#= data[i].FacebookTalkingAboutTrend == -2 ? "" : "Talking About"#</label><label style="color:#= data[i].FacebookTalkingAboutTrend==-1 ? "red" : (data[i].FacebookTalkingAboutTrend==1 ? "green" : "grey") #">#= data[i].FacebookTalkingAboutTrend == -2 ? "" : (data[i].FacebookTalkingAboutTrend == -1 ? "▼" : (data[i].FacebookTalkingAboutTrend == 1 ? "▲" : "=")) #</label></div>
                 </div>
-                    
-                <!--<div class="social">
-                    <span class="km-icon km-share"></span>
-                    # if(data[i].FacebookMetrics != undefined && data[i].FacebookMetrics.length > 0) { #
-                    <span style="margin-left:5px"> #= data[i].FacebookMetrics[data[i].FacebookMetrics.length-1].Likes.toString() # Likes</span>
-                    # } else {#
-                    <span>No social information</span>
-                    #}#
-                    <span style="width:20px"></span>
-                    # if(data[i].FacebookMetrics != undefined && data[i].FacebookMetrics.length > 0) { #
-                    <span style="margin-left:15px"> #= data[i].FacebookMetrics[data[i].FacebookMetrics.length-1].TalkingAbout.toString() # Talking Abouts</span>
-                    # } #
-                    <div style="clear:both"></div>
-                    # if(data[i].FacebookMetrics != undefined && data[i].FacebookMetrics.length > 0) { #
-                    <span style="margin-left:15px"> Last update in: #= data[i].FacebookMetrics[data[i].FacebookMetrics.length-1].Timestamp #</span>
-                    # } #
-                </div>-->
             </div>
             </a>
         </div>
@@ -220,6 +203,11 @@
             </div>
         </div>
         <div class="row" style="padding:10px 20px 10px 20px">
+            <div class="panel panel-default">
+                <div style="font-size:11px">
+                    <span class="span-summary"></span>    
+                </div>
+            </div>
             <div class="panel panel-default">
                 <div id="program-chart" style="width:100%;height:300px;display:none"></div>
             </div>

@@ -259,6 +259,9 @@
             var idx =  $(e.target.context).find(".program-tile").data().id;
             var elem = app.programsViewModel.programData[idx];
             $(e.sender.header).find(".km-view-title span").text(elem.Program);
+            if(elem.NOTAData.Summary.length > 0)
+                $(e.sender.element).find(".span-summary").text("Summary:" + elem.NOTAData.Summary);
+            
             var chart = $(e.sender.element).find("#program-chart");
             if(elem.FacebookMetrics.length < 2)
             {
@@ -293,7 +296,7 @@
                     field: "Timestamp",
                     labels:{
                         template: '#: data.value.substring(0,10) #',
-                        /*rotation: -90,*/
+                        rotation: -90,
                         visible: true
                     },
                     majorGridLines: { visible: false }
