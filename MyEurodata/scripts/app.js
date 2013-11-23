@@ -21,7 +21,7 @@
         var statusBarStyle = os.ios && os.flatVersion >= 700 ? "black-translucent" : "black";
 
         navigator.splashscreen.hide();
-        application = new kendo.mobile.Application(document.body, { transition: "slide", layout: "mobile-tabstrip", statusBarStyle : statusBarStyle, skin: 'flat' });
+        application = new kendo.mobile.Application(document.body, { transition: "slide", layout: "mobile-tabstrip", statusBarStyle : statusBarStyle });
     }, false);
 
     //Skin change function is for the demo. On real project only one theme should be chosen.

@@ -1,62 +1,88 @@
 body, html {
-    margin: 0;
-    height: 100%;
-    width: 100%;
+    margin:0;   
+    height:100%;
+    width:100%;
 }
 
-.km-content {
-    text-align: center;
+.km-tablet .km-ios .km-navbar .km-view-title{
+    color:#000;
+    text-shadow: 0 -1px rgba(255,255,255,0.3);
 }
 
-.widget-content {
-    position: absolute;
-    bottom: 0.3em;
-    left: 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 10%;
+#filter-popover .km-navbar .km-view-title{
+    color:White;
+    text-shadow: 0 -1px rgba(255,255,255,0.3);
 }
 
-.widget-content #qrcode-value {
-    display: block;
-    width: 85%;
-    margin: 50px auto 10px auto;
-    max-width: 260px;
-    background-color: #fff;
-    font-style: italic;
-    color: #000;
-    padding: 7px 10px;
-    border-radius: 3px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(180, 180, 180);
-    border-bottom-color: rgb(255, 255, 255);
-    box-shadow: 0 -1px 0 #3C3C3C;
+/*.km-ios .km-view .km-content {
+    background-image: -webkit-gradient(linear,50% 100%,50% 0,color-stop(0, rgba(255,255,255,.2)),color-stop(1, rgba(255,255,255,.8))),url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGklEQVR4Xm3DMREAAACCQKPYvySeO8MHML0BOrEVLMJmdzAAAAAASUVORK5CYII=);
+    background-image: -moz-linear-gradient(50% 100%,50% 0,rgba(255,255,255,.2),rgba(255,255,255,.8)),url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGklEQVR4Xm3DMREAAACCQKPYvySeO8MHML0BOrEVLMJmdzAAAAAASUVORK5CYII=);
+    background-image: -ms-linear-gradient(50% 100%,50% 0,rgba(255,255,255,.2),rgba(255,255,255,.8)),url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGklEQVR4Xm3DMREAAACCQKPYvySeO8MHML0BOrEVLMJmdzAAAAAASUVORK5CYII=);
+    background-repeat: repeat,repeat;
+    background-position: 0 0,0% 0%;
+    background-color: rgb(196, 204, 213);
+}
+.km-android .km-view .km-content {
+    background-image: -webkit-gradient(linear,50% 100%,50% 0,color-stop(0, rgba(255,255,255,.2)),color-stop(1, rgba(255,255,255,.8)));
+    background-image: -moz-linear-gradient(50% 100%,50% 0,rgba(255,255,255,.2),rgba(255,255,255,.8));
+    background-image: -ms-linear-gradient(50% 100%,50% 0,rgba(255,255,255,.2),rgba(255,255,255,.8));
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-color: rgb(0, 0, 0);
+}
+.km-wp .km-view .km-content {
+    background-image: -webkit-gradient(linear,50% 100%,50% 0,color-stop(0, rgba(255,255,255,.2)),color-stop(1, rgba(255,255,255,.8)));
+    background-image: -moz-linear-gradient(50% 100%,50% 0,rgba(255,255,255,.2),rgba(255,255,255,.8));
+    background-image: -ms-linear-gradient(50% 100%,50% 0,rgba(255,255,255,.2),rgba(255,255,255,.8));
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-color: rgb(0, 0, 0);
+}*/
+
+.km-view .km-content {
+    background-image: url('../styles/images/body-back.png') !important;
+    padding: 5px;
 }
 
-.widget-content #qrcode-generate {
-    display: block;
-    width: 80%;
-    margin: 0 auto;
-    max-width: 250px;
+.km-list > li{
+    background: transparent !important;
 }
 
-#qrcode > svg {
-    margin: 1em auto;
-    top: 50%;
-}
+
+.km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
+.km-contacts:before, .km-contacts:after { content: "\E0E4"; }
+.km-graph:before, .km-graph:after { content: "\E04B"; }
+.km-close-button:before, .km-close-button:after { content: "X"; }
 
 .main-header{
-    height:70px;
-    background:url('../styles/images/MyEurodataTV2010-Setup 500x70.png');
+    height:100px;
+    background:url('../styles/images/header-back.png');
     background-position:bottom;
 }
 
+.programs-header{
+    height:100px;
+    background:url('../styles/images/header-back.png');
+    background-position:bottom;
+}
+
+label {
+    margin-bottom: 0px !important;
+}
+
+.panel-heading {
+    text-align: center;
+}
+
+
+/**/
+
+
 .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
 
-#topProgramsList li{
+/*#topProgramsList li{
     padding-right: 0px !important;
-}
+}*/
 
 #topProgramsList .item-program {
     float: left;
@@ -64,6 +90,7 @@ body, html {
     line-height: 1.0em;
     margin: 0 0 0 0;
     width: 50%;
+    color: #1984c8;
 }
 
 #topProgramsList .item-channel {
@@ -74,11 +101,10 @@ body, html {
     width: 20%;
 }
 
-#topProgramsList .item-program,
 #topProgramsList .item-channel,
 #topProgramsList .item-share
  {
-    color: #4c2a1b;
+    color: #333;
 }
 
 #topProgramsList .item-channel {
@@ -93,7 +119,7 @@ body, html {
     width: 15%;
 }
 
-.panel-heading{
+/*.panel-heading{
     padding-top: 5px !important;
     padding-bottom: 0px !important;
 }
@@ -118,7 +144,7 @@ body, html {
     .km-ios #popover .km-navbar .km-button
     {
         background-color: #000;
-    }
+    }*/
 
 .km-user:after,
 .km-user:before{
@@ -132,70 +158,6 @@ body, html {
 
 .k-state-selected{
     background-color: #1984c8;
-}
-
-
-
-/* Country Menu */
-
-#rotate_wrapper{
-    height: 300px;
-    position: fixed;
-    z-index: 9999;
-    margin-top:10px;
-}
-
-#menu {list-style:none; padding: 0; border: none;height:100%;width:20px;						
-}
- 
-#menu li {text-align: center;height: 50px;line-height:50px;}
-
-#menu li .menu-item-div {
-				display: inline-block;
-                cursor:pointer;
-                font-size: 15px; 
-                text-decoration:none; 
-            -webkit-transform: rotate(-90deg);
-                -moz-transform: rotate(-90deg);
-                -ms-transform: rotate(-90deg);
-                -o-transform: rotate(-90deg);
-                filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    height: 50px;
-    width:100%;
-    margin-left:0px;
-    margin-top: 5px;
-    color: black !important;
-}
-
-#menu .selected {
-    width: 40px;
-    height: 200px;
-    background-color: Orange;
-}
-
-#menu .selected .menu-item-div {
-    margin-top: 55px;
-}
-
-.france {
-    background-color: grey;
-}
-
-.usa {
-    background-color: grey;
-}
-
-.japan {
-    background-color: grey;
-}
-
-#menu li:hover{
-    opacity: 0.8
-}
-
-.col-sm-6{
-    padding-right: 10px !important;
-    padding-left: 10px !important;
 }
 
 

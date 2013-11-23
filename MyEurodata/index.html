@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
 
     <link href="kendo/styles/kendo.dataviz.mobile.min.css" rel="stylesheet" />
-    <link href="kendo/styles/kendo.dataviz.flat.min.css" rel="stylesheet" />
+    <link href="kendo/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
     <link href="kendo/styles/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="styles/main.css" rel="stylesheet" />
 
@@ -23,13 +23,13 @@
     
     <!-- General -->
     
-    <div id="tabstrip-general" data-role="view" data-title="By Country" data-model="app.homeViewModel" 
+    <div id="tabstrip-general" data-role="view" data-title="Dashboard" data-model="app.homeViewModel" 
         data-hide="app.homeViewModel.unbindResizeEvent" data-show="app.homeViewModel.initializeViewDesign"
         data-before-show="app.homeViewModel.updateMenu">
         
         <div id="home">
             <div class="row" style="padding-left:10px;padding-right:10px;padding-top:10px;">
-                <div class="col-xs-12 col-sm-6 col-md-6" >
+                <div class="col-xs-12 col-sm-12 col-md-6" >
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <label>Share by Channel</label>
@@ -39,10 +39,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label>Channel Audience </label>
+                            <label>Weekly Channel Performance </label>
                         </div>
                         <div class="panel-body">
                             <div id="channelAudienceInTime-chart"></div>
@@ -54,7 +54,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <label>Top Programs</label>
+                            <label>Top 15 Programs by Rating</label>
                         </div>
                         <div class="panel-body">
                             <ul id="topProgramsList">
@@ -101,10 +101,19 @@
         
         <!-- Popovers -->
         
-        <div data-role="popover" id="programs-target-popover" data-popup='{"height": "10em", "width": "20em"}'>
+        <div data-role="popover" id="programs-target-popover" data-popup='{"height": "12em", "width": "20em"}'>
             <div data-role="view" data-title="Targets">
                 <ul data-role="listview" id="programListTargetsListView">
                 </ul>
+            </div>
+        </div>
+        
+        <div id="programs-countrychannel-popover" data-role="popover" data-popup='{"height": "25em", "width": "20em"}'>
+            <div data-role="view" data-title="Countries/Channels">
+                <div id="channelsCountries">
+                    <ul id="countriesChannelsPanelBar"data-role="listview"  data-style="inset" data-type="group">
+                    </ul>
+                </div>
             </div>
         </div>
         
@@ -116,7 +125,7 @@
     
     <!-- Drawers -->
     
-    <div data-role="drawer" id="country-drawer" style="width:200px;margin-top:40px" data-views="['/']">
+    <!--<div data-role="drawer" id="country-drawer" style="width:200px;margin-top:40px" data-views="['/']">
         <ul data-role="listview" data-type="group">
             <label>Countries</label>
             <li><div data-role="button" data-click="app.homeViewModel.onCountryClick" data-id="France" data-transition="none">France</div></li>
@@ -130,7 +139,7 @@
             <ul id="countriesChannelsPanelBar"data-role="listview"  data-style="inset" data-type="group">
             </ul>
         </div>
-    </div>
+    </div>-->
     
     <!-- End Drawers -->
     
@@ -144,10 +153,10 @@
     </script>
     
     <script type="text/x-kendo-template" id="topProgramsListHeaderTemplate">
-        <h4 class="item-channel">Channel</h4>
-        <h4 class="item-program">Program</h4>
-        <h4 class="item-share" style="padding-right:.7em">Shr%</h4>
-        <h4 class="item-share" style="padding-right:.7em">Rat%</h4>
+        <h4 style="font-weight:bold" class="item-channel">Channel</h4>
+        <h4 style="font-weight:bold" class="item-program">Program</h4>
+        <h4 style="font-weight:bold;text-align:left;margin-left:-15px" class="item-share" style="padding-right:.7em">Shr%</h4>
+        <h4 style="font-weight:bold" class="item-share" style="padding-right:.7em">Rat%</h4>
         <div style="clear:both"></div>
     </script>
     
@@ -221,31 +230,19 @@
     <div data-role="layout" data-id="mobile-tabstrip">
 
         <!--Header-->
-        <div data-role="header">
-            <div data-role="navbar" style="height:80px;margin-left:5px;margin-top:20px;">
-                <div data-align="left" style="">
-                    <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onCountryClick">
-                        <li>
-                            <img src="styles/images/fr.png" /> France
-                        </li>
-                        <li>
-                            <img src="styles/images/us.png" /> USA
-                        </li>
-                        <li>
-                            <img src="styles/images/jp.png" /> Japan
-                        </li>
-                    </ul>
+        <div data-role="header" class="main-header">
+            <div style="height:100px;z-index:1000;margin-left:5px;margin-right:5px">
+                <div style="padding:20px 5px 5px 5px;width:70px;height:70px;float:left">
+                    <img src="styles/images/NSIETV - 48.png" style="width:48px"/>
                 </div>
-                <span data-role="view-title" data-align="center"></span>
-                <a href="#tabstrip-programs" id="SecondaryViewAnchor" data-align="right">By Program</a>
-            </div>
-        </div>
-
-        <!--Footer-->
-        <div data-role="footer">
-            <div data-role="navbar">
-                <div data-align="left" style="margin-left:10px;margin-top:10px"><span class="km-icon km-user" style="float:left;margin-right:5px"></span>MyEurodata User</div>
-                <div data-align="center" style="margin-top:10px">
+                <div style="float:left;padding:5px;margin-top: 1.1em">
+                    <span style="color:#4D4D4D;font-size:18px">Dashboard</span>
+                    <div style="color:#4D4D4D;font-size:12px">My Eurodata User<img src="styles/images/1.jpg" width="24" height="24" /></div>
+                </div>
+                <div style="float:right;margin-left:10px;margin-top: 0.9em;padding:5px;">
+                    <a href="#target-popover" data-rel="popover" data-role="button">Targets</a>
+                </div>
+                <div style="margin-left:10px;float:right;margin-top: 0.7em;padding:5px;">
                     <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onPeriodClick">
                         <li>
                             All
@@ -261,7 +258,34 @@
                         </li>
                     </ul>
                 </div>
-                <a data-align="right" style="margin-right:10px;margin-top:10px" href="#target-popover" data-rel="popover" data-role="button">Targets</a>
+                <div style="margin-left:10px;float:right;margin-top: 0.7em;padding:5px;">
+                    <div>
+                        <ul data-role="buttongroup" data-index="0" data-select="app.homeViewModel.onCountryClick">
+                            <li>
+                                <img src="styles/images/France_Flag_64_45.jpg" width="22" />
+                            </li>
+                            <li>
+                                <img src="styles/images/USA_Flag_64_45.jpg" width="22" />
+                            </li>
+                            <li>
+                                <img src="styles/images/Japan_Flag_64_45.jpg" width="22" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>          
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div style="position:fixed;width:140px;height:46px;z-index:1000;margin-top:5px;margin-left:5px">
+                <div style="padding:10px 5px 5px 5px;width:46px;height:46px;float:left">
+                    <img src="styles/images/NSIETV - 48.png" style="width:40px;"/>
+                </div> 
+            </div>
+            <div data-role="tabstrip">
+                <a href="#tabstrip-general" data-icon="home">Dashboard</a>
+                <a href="#tabstrip-programs" data-icon="search">Explorer</a>
             </div>
         </div>
 
@@ -270,19 +294,19 @@
     <div data-role="layout" data-id="programs-tabstrip">
 
         <!--Header-->
-        <div data-role="header">
-            <div data-role="navbar" style="height:80px;margin-left:5px;margin-top:20px;">
-                <a data-role="button" data-rel="drawer" href="#countryChannel-drawer" data-icon="drawer-button" data-align="left" style=""></a>
-                <span data-align="center" data-role="view-title"></span>
-                <a data-align="right" href="#tabstrip-general" id="SecondaryViewAnchor" style="">By Country</a>
-            </div>
-        </div>
-
-        <!--Footer-->
-        <div data-role="footer">
-            <div data-role="navbar">
-                <div data-align="left" style="margin-left:10px;margin-top:10px"><span class="km-icon km-user" style="float:left;margin-right:5px"></span>MyEurodata User</div>
-                <div data-align="center" style="margin-top:10px">
+        <div data-role="header" class="programs-header">
+            <div style="height:100px;z-index:1000;margin-left:5px;margin-right:5px">
+                <div style="padding:20px 5px 5px 5px;width:70px;height:70px;float:left">
+                    <a href="#tabstrip-general"><img src="styles/images/NSIETV - 48.png" style="width:48px"/></a>
+                </div>
+                <div style="float:left;padding:5px;margin-top: 1.1em">
+                    <span style="color:#4D4D4D;font-size:18px">Explorer</span>
+                    <div style="color:#4D4D4D;font-size:12px">My Eurodata User<img src="styles/images/1.jpg" width="24" height="24" /></div>
+                </div>
+                <div style="float:right;margin-left:10px;margin-top: 0.9em;padding:5px;">
+                    <a href="#programs-target-popover" data-rel="popover" data-role="button">Targets</a>
+                </div>
+                <div style="margin-left:10px;float:right;margin-top: 0.7em;padding:5px;">
                     <ul data-role="buttongroup" data-index="0" data-select="app.programsViewModel.onPeriodClick">
                         <li>
                             All
@@ -298,7 +322,22 @@
                         </li>
                     </ul>
                 </div>
-                <a data-align="right" style="margin-right:10px;margin-top:10px" href="#programs-target-popover" data-rel="popover" data-role="button">Targets</a>
+                <div style="margin-left:10px;float:right;margin-top: 0.9em;padding:5px;">
+                    <a href="#programs-countrychannel-popover" data-rel="popover" data-role="button">Countries/Channels</a>
+                </div>          
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div style="position:fixed;width:140px;height:46px;z-index:1000;margin-top:5px;margin-left:5px">
+                <div style="padding:10px 5px 5px 5px;width:46px;height:46px;float:left">
+                    <img src="styles/images/NSIETV - 48.png" style="width:40px;"/>
+                </div> 
+            </div>
+            <div data-role="tabstrip">
+                <a href="#tabstrip-general" data-icon="home">Dashboard</a>
+                <a href="#tabstrip-programs" data-icon="search">Explorer</a>
             </div>
         </div>
 
