@@ -104,7 +104,7 @@
                 if(channels.length == 0) channels = "none";
                 var period = GetProgramDateFilter();
                 var targets = $("#programListTargetsListView").data("kendoMobileListView").items().map(function() {
-                  return $(this).find("input").data().id;
+                  return ($(this).find("input").attr("data-check")=="1") ? $(this).find("input").data().id : "-1";
                 }).get().join(',');
                 if(targets.length == 0) targets = "-1";
                 var tmpl = kendo.template($("#programListContainerTmpl").html());
@@ -164,13 +164,13 @@
                 }
             });
             
-            var selected = [];
+            /*var selected = [];
             if(app.programsViewModel.programTargetsLoaded){
                 $("#programListTargetsListView").data("kendoMobileListView").items().each(function(){
                     selected.push($(this).find("input").attr("checked"))
                 });
             } else
-                selected = ["checked", "checked", "checked"];
+                selected = ["checked", "checked", "checked"];*/
             
             if(app.programsViewModel.programTargetsLoaded){
                 dataSource.read();
@@ -183,14 +183,19 @@
                     dataBound: function(e) {
                         app.programsViewModel.programTargetsLoaded = true;
                         app.programsViewModel.getProgramsByFilter();
-                    },
+                    }/*,
                     click: function(e) {
                         app.programsViewModel.getProgramsByFilter();
-                    }
+                    }*/
                 }).kendoTouch({
                     filter: ">li",
                     enableSwipe: false,
                     tap: function(e){
+                        if($(e.touch.currentTarget).find("input").attr("data-check") == "1")
+                            $(e.touch.currentTarget).find("input").attr("data-check", "0");
+                        else
+                            $(e.touch.currentTarget).find("input").attr("data-check", "1");
+                        app.programsViewModel.getProgramsByFilter();
                         //app.homeViewModel.closeFilterPopover(e);
                         //var vendorName = $(e.touch.currentTarget).find("label").text();
                         //kendo.mobile.application.navigate("#tabstrip-vendor?uid=" + vendorName);
